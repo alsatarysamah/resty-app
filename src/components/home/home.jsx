@@ -1,10 +1,10 @@
 import "./home.css";
 import React, { useState } from "react";
-import { Button, Col, Form, Row, Tab, Tabs } from "react-bootstrap";
+import { Button, Col, Form, Row} from "react-bootstrap";
+import MethodTab from "../methodTab/methodTab";
 
 function Home(props) {
-  const [active, setActive] = useState(false);
-  const [key, setKey] = useState("home");
+
   return (
     <div className="mt-5">
       <Row className=" d-flex justify-content-center align-items-center">
@@ -16,24 +16,15 @@ function Home(props) {
               type="url"
               placeholder="Enter a URL"
             />
-            <Button className="general-btn">Go</Button>
+            <div lg={6}>
+            <Button variant="outline-warning" className="general-btn " size="lg" >
+              Go
+            </Button>
+            </div>
           </Form>
         </Col>
         <Col md={8} lg={6} xs={12}>
-          <Tabs
-            id="controlled-tab-example"
-            activeKey={key}
-            onSelect={(k) => setKey(k)}
-            className="xxxx d-flex justify-content-center my-3 mx-5 "
-            tabClassName="xxxx"
-          >
-            <Tab  eventKey="get" title="GET"></Tab>
-            <Tab eventKey="post" title="POST"></Tab>
-            <Tab eventKey="put" title="PUT"></Tab>
-            <Tab eventKey="delete" title="DELETE"></Tab>
-            <Tab eventKey="basic" title="BASIC AUTH"></Tab>
-            <Tab eventKey="bearer" title="BEARER"></Tab>
-          </Tabs>
+         <MethodTab/> 
         </Col>
       </Row>
     </div>

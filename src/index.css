@@ -29,11 +29,13 @@ code {
  
 .general-btn{
   background-color: #FF577F;
+ color: #fffac8;
+
   border: 0px;
 }
 .general-btn:hover{
   background-color: #FFF9B0;
- color: black;
+ color: #FF577F;
 }
 .small-container {
   max-width: 600px;
