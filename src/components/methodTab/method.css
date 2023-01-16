@@ -1,0 +1,12 @@
+.method-tab{
+    color: #FF577F !important;
+border: 0px;
+
+}
+.tabs{
+    background-color: #FFF9B0;
+border: 0px;
+}
+.general-btn:target{
+display: block;
+}
