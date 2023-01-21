@@ -21,7 +21,7 @@ function MethodTab(props) {
 
         <Tab tabClassName="method-tab" eventKey="put" title="PUT"></Tab>
         <Tab tabClassName="method-tab" eventKey="delete" title="DELETE"></Tab>
-        <Tab tabClassName="method-tab" title="BASIC AUTH"></Tab>
+        <Tab tabClassName="method-tab" onClick={()=>{console.log("click")}} title="BASIC AUTH"></Tab>
         <Tab tabClassName="method-tab" title="BEARER"></Tab>
       </Tabs>
     </div>

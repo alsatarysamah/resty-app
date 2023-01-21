@@ -9,7 +9,6 @@ import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
 export default function Signup() {
   const navigate = useNavigate();
   const [username, setUsername] = useState();
-  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -21,10 +20,9 @@ export default function Signup() {
     }
 
     axios
-      .post("https://covidserver-production.up.railway.app/signup", {
+      .post("http://localhost:4000/signup", {
         username,
         password,
-        email,
       })
       .then((data) => {
         sessionStorage.setItem("userInfo", JSON.stringify(data));
@@ -54,17 +52,8 @@ export default function Signup() {
                       <Form.Group className="mb-3" controlId="username">
                         <Form.Label>Username</Form.Label>
                         <Form.Control
-                          // value={username}
-                          onChange={(e) => setUsername(e.target.value)}
-                          required
-                        />
-                      </Form.Group>
-                      <Form.Group className="mb-3" controlId="email">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control
-                          value={email}
                           type="email"
-                          onChange={(e) => setEmail(e.target.value)}
+                          onChange={(e) => setUsername(e.target.value)}
                           required
                         />
                       </Form.Group>

@@ -20,6 +20,8 @@ code {
 
 .site{
   min-height: 100vh; 
+  font-family: 'Cairo', sans-serif;
+  font-size: larger;
  }
  main{
   flex: 1;
