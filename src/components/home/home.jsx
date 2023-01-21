@@ -7,12 +7,10 @@ import Search from "../search";
 import Body from "../body";
 
 function Home(props) {
-
   const [method, setMethod] = useState("get");
-
+  const [body, setBody] = useState({});
 
   useEffect(() => {
-
     // axios
     //   .get("http://localhost:4000/history", {
     //     headers: {
@@ -29,20 +27,20 @@ function Home(props) {
   }, []);
 
   function methodSetting(method) {
-setMethod(method)
+    setMethod(method);
   }
- 
+
   return (
     <div className="mt-5">
       <Row className=" d-flex flex-column justify-content-center align-items-center">
         <Col md={12} lg={7} xs={18}>
-          <Search method={method}/>
+          <Search method={method} body={body}/>
         </Col>
         <Col md={8} lg={6} xs={12}>
-          <MethodTab methodSetting={methodSetting}/>
+          <MethodTab methodSetting={methodSetting} />
         </Col>
         <Col md={8} lg={4} xs={8}>
-          <Body/>
+          <Body setBody={setBody} />
         </Col>
       </Row>
     </div>

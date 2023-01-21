@@ -19,7 +19,7 @@ export default function Signin() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    try {
+   
       const options = {
         url: "http://localhost:4000/signin",
         method: "post",
@@ -30,27 +30,30 @@ export default function Signin() {
         },
       };
 
-      axios(options).then((response) => {
-        console.log(response.data.user);
-        sessionStorage.setItem("userInfo", JSON.stringify(response.data.user));
-        navigate("/");
-      });
-    } catch (err) {
-      toast.error("Invalid Username or Password");
-      console.log(err);
-    }
+      axios(options)
+        .then((response) => {
+          sessionStorage.setItem(
+            "userInfo",
+            JSON.stringify(response.data.user)
+          );
+          navigate("/");
+        })
+        .catch((e) => {
+          toast.error("Invalid Username or Password");
+        });
+  
   };
 
   return (
     <Container>
-          <ToastContainer />
-
       <Helmet>
         <title>Signin</title>
       </Helmet>
       <Row className=" d-flex justify-content-center align-items-center mt-5">
         <Col md={8} lg={5} xs={12}>
           <div className=""></div>
+          <ToastContainer />
+
           <Card className="shadow px-4">
             <Card.Body>
               <div className="mb-3 mt-md-4">
