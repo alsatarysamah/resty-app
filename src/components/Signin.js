@@ -7,7 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import superAgent from "superagent";
 import base64 from "base-64";
-import * as axios from 'axios';
+import * as axios from "axios";
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
 
 export default function Signin() {
@@ -16,33 +16,41 @@ export default function Signin() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-     
-      const response = await superAgent
-        .post("http://localhost:4000/signin")
-        .set("authorization", `Basic ${base64.encode(`${email}:${password}`)}`);
-        console.log(response.body.user);
-      sessionStorage.setItem("userInfo", JSON.stringify(response.body.user));
-      // if (location.state) navigate(`${location.state.redirect}`);
-       navigate("/");
+      const options = {
+        url: "http://localhost:4000/signin",
+        method: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+          Authorization: `Basic ${base64.encode(`${email}:${password}`)}`,
+        },
+      };
+
+      axios(options).then((response) => {
+        console.log(response.data.user);
+        sessionStorage.setItem("userInfo", JSON.stringify(response.data.user));
+        navigate("/");
+      });
     } catch (err) {
-      toast.error("invalid password or username");
+      toast.error("Invalid Username or Password");
       console.log(err);
     }
   };
- 
+
   return (
     <Container>
+          <ToastContainer />
+
       <Helmet>
         <title>Signin</title>
       </Helmet>
-      <Row className="vh-100 d-flex justify-content-center align-items-center">
+      <Row className=" d-flex justify-content-center align-items-center mt-5">
         <Col md={8} lg={5} xs={12}>
           <div className=""></div>
-          <ToastContainer />
           <Card className="shadow px-4">
             <Card.Body>
               <div className="mb-3 mt-md-4">
@@ -59,11 +67,7 @@ export default function Signin() {
                         required
                       />
                     </Form.Group>
-                    <Form.Group
-                      className="mb-3"
-                      controlId="formBasicPas
-                  sword"
-                    >
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
                       <Form.Label className="text-center">Password</Form.Label>
                       <Form.Control
                         type="password"
@@ -75,7 +79,11 @@ export default function Signin() {
                     </Form.Group>
 
                     <div className="d-grid">
-                      <Button id="delete-btn" variant="primary" type="submit">
+                      <Button
+                        className="general-btn "
+                        variant="primary"
+                        type="submit"
+                      >
                         Signin
                       </Button>
                     </div>
