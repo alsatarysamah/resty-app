@@ -1,6 +1,10 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./components/home/home";
 import NavbarResty from "./components/navbar/navbar";
+import Signin from "./components/Signin";
+import Signup from "./components/Signup";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -9,7 +13,15 @@ function App() {
         <NavbarResty />
       </header>
       <main>
-        <Home/>
+        {/* <Home/> */}
+        <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/signin" element={<Signin/>} />
+            <Route path="/signup" element={<Signup />} />
+
+
+
+          </Routes>
       </main>
       <footer bg="dark" variant="dark">
         <div className="text-center">All right is reserved</div>
