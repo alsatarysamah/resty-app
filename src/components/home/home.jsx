@@ -1,10 +1,24 @@
 import "./home.css";
-import React, { useState } from "react";
-import { Button, Col, Form, Row} from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import MethodTab from "../methodTab/methodTab";
+import axios from "axios";
 
 function Home(props) {
+  useEffect(() => {
+    console.log(JSON.parse(sessionStorage.getItem('userInfo')).token );
 
+    axios
+      .get("http://localhost:4000/history",{'headers': {
+        'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem('userInfo')).token 
+      }})
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
   return (
     <div className="mt-5">
       <Row className=" d-flex justify-content-center align-items-center">
@@ -17,14 +31,18 @@ function Home(props) {
               placeholder="Enter a URL"
             />
             <div lg={6}>
-            <Button variant="outline-warning" className="general-btn " size="lg" >
-              Go
-            </Button>
+              <Button
+                variant="outline-warning"
+                className="general-btn "
+                size="lg"
+              >
+                Go
+              </Button>
             </div>
           </Form>
         </Col>
         <Col md={8} lg={6} xs={12}>
-         <MethodTab/> 
+          <MethodTab />
         </Col>
       </Row>
     </div>
