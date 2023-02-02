@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export const api = (url, method, body,setResult) => {
+export const api =async (url, method, body) => {
   const options = {
     url: url,
     method: method,
@@ -13,23 +13,22 @@ export const api = (url, method, body,setResult) => {
     },
     data: body,
   };
+try{
+ const response=await axios(options);
+ return response.data;
+}catch(e){
+       
+  let arr = JSON.parse(e.request?.responseText).errors;
 
-  axios(options)
-    .then((response) => {
-      console.log("ressssssssssss", response.data);
-      setResult(response.data)
-      return response.data;
-    })
-    .catch((e) => {
-      console.log(e);
-      let s = new Set();
-      JSON.parse(e.request?.responseText).errors?.forEach((element) => {
-        s.add(element.msg);
-        toast.error(element.msg);
-      });
-      console.log(s);
-      s.size > 0
-        ? toast.error(s.values[1])
-        : toast.error(e.request.responseText);
-    });
+  arr.forEach((element) => {
+    
+    toast.error(element.msg);
+  });
+
+  arr.length > 0
+    ? toast.error(arr[1])
+    : toast.error(e.request.responseText);
+}
+ 
+  
 };

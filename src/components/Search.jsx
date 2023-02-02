@@ -3,39 +3,11 @@ import React, { useState } from "react";
 import { Button, Col, Form } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
 
-function Search({ urlSetting, submitHandler }) {
+function Search({ urlSetting, submitHandler,btnName }) {
   const goHandler = (e) => {
     e.preventDefault();
     submitHandler();
-    // const options = {
-    //   url: url,
-    //   method: props.method,
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json;charset=UTF-8",
-    //     Authorization:
-    //       "Bearer " + JSON.parse(sessionStorage.getItem("userInfo")).token,
-    //   },
-    //   data: props.body,
-    // };
-
-    // axios(options)
-    //   .then((response) => {
-    //     props.resultSetting(response.data)
-    //     console.log("ressssssssssss", response.data);
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //     let s = new Set();
-    //     JSON.parse(e.request?.responseText).errors?.forEach((element) => {
-    //       s.add(element.msg);
-    //       toast.error(element.msg)
-    //     });
-    //     console.log(s);
-    //     s.size > 0
-    //       ? toast.error(s.values[1])
-    //       : toast.error(e.request.responseText);
-    //   });
+  
   };
   return (
     <Col md={12} lg={7} xs={18}>
@@ -59,7 +31,7 @@ function Search({ urlSetting, submitHandler }) {
               size="lg"
               type="submit"
             >
-              Go
+              {btnName}
             </Button>
           </div>
         </Form>

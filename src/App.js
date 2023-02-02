@@ -5,6 +5,7 @@ import NavbarResty from "./components/Navbar/Navbar";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import "react-toastify/dist/ReactToastify.css";
+import History from "./components/History/History";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/history" element={<History />} />
+
         </Routes>
       </main>
       <footer bg="dark" variant="dark">

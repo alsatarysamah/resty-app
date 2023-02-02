@@ -15,7 +15,7 @@ function CollapsibleExample() {
             
           </Nav>
           <Nav className='d-flex align-items-center' >
-            <Nav.Link href="#deets" >History</Nav.Link>
+            <Nav.Link href="/history" >History</Nav.Link>
             <Nav.Link eventKey={2} href="/signin">
               Signin
             </Nav.Link>
