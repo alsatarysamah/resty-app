@@ -16,21 +16,37 @@ function Home() {
   const [result, setResult] = useState();
 
   const submitHandler = async () => {
-    await api(url, method, body)
-      .then((data) => {
-        setResult(data)
-      })
-     
+    await api(url, method, body).then((data) => {
+      setResult(data);
+      console.log({ result });
+    });
+    console.log("result==>",typeof result);
+    const record = {
+      url: url,
+      method: method,
+      response: (result)||null,
+      userId: JSON.parse(sessionStorage.getItem("userInfo")).id,
+    };
+    console.log({ record });
+    await api("http://localhost:4000/history", "post", record).then((data) => {
+      
+      console.log({ data });
+    });
   };
 
   return (
     <div className="mt-5">
-       <Helmet>
-            <title>Resty</title>
-        </Helmet>
+      <Helmet>
+        <title>Resty</title>
+      </Helmet>
       <Row className=" d-flex flex-column justify-content-center align-items-center">
-        <p>http://localhost:4000/history</p>
-        <Search urlSetting={setUrl} submitHandler={submitHandler} btnName="GO"/>
+        <p>https://pokeapi.co/api/v2/pokemon</p>
+
+        <Search
+          urlSetting={setUrl}
+          submitHandler={submitHandler}
+          btnName="GO"
+        />
 
         <MethodTab methodSetting={setMethod} />
 

@@ -15,19 +15,21 @@ export const api =async (url, method, body) => {
   };
 try{
  const response=await axios(options);
+ console.log(response.data);
  return response.data;
 }catch(e){
-       
-  let arr = JSON.parse(e.request?.responseText).errors;
+       console.log(e);
+       toast.error("Invalid URL ")
+  // let arr = JSON.parse(e.request?.responseText).errors;
 
-  arr.forEach((element) => {
+  // arr.forEach((element) => {
     
-    toast.error(element.msg);
-  });
+  //   toast.error(element.msg);
+  // });
 
-  arr.length > 0
-    ? toast.error(arr[1])
-    : toast.error(e.request.responseText);
+  // arr.length > 0
+  //   ? toast.error(arr[1])
+  //   : toast.error(e.request.responseText);
 }
  
   

@@ -9,7 +9,7 @@
 }
 .result{
     overflow-x:scroll; 
-    overflow-y:visible;
+    /* overflow-y:visible; */
  height: 300px;
 }
   .__json-key__
