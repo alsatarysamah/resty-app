@@ -2,7 +2,7 @@ import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./carousele.css";
+// import "./carousele.css";
 
 import { images } from "./Data";
 import { Button, Card } from "react-bootstrap";

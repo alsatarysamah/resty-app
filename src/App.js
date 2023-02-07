@@ -14,7 +14,8 @@ function App() {
         <NavbarResty />
       </header>
       <main>
-        {/* <Home/> */}
+       
+       
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/signin" element={<Signin />} />

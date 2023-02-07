@@ -4,6 +4,7 @@ import { Col, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { api } from "../../api";
 import Carousel from "../Carousele";
+import HistoryTable from "../HistoryTable/HistoryTable";
 import Search from "../Search";
 import "./history.css";
 
@@ -41,7 +42,7 @@ function History(props) {
         />
         {/* <historyRecords/> */}
         <Col md={8} lg={6} xs={8}>
-          {historyRecords&&<Carousel historyRecords={historyRecords} active={0} />}
+          {historyRecords&&<HistoryTable historyRecords={historyRecords}  />}
           
         </Col>
       </Row>
