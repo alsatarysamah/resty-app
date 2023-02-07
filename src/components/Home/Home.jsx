@@ -1,7 +1,7 @@
 import "./home.css";
 import React, { useEffect, useState } from "react";
 import { Row } from "react-bootstrap";
-import MethodTab from "../methodTab/methodTab";
+import MethodTab from "../MethodTab/MethodTab";
 import Search from "../Search";
 import Body from "../Body";
 import Result from "../Result/Result";
