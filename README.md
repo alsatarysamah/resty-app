@@ -1,5 +1,9 @@
 # Getting Started with Create React App
+//carousel
 
+ //'http://localhost:3000/analyze?imageurl=https://google.com'
+  //'http://localhost:4000/history?url=https://api.samah.com/' 
+  //https://pokeapi.co/api/v2/pokemon
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

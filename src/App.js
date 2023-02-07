@@ -1,10 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Home from "./components/home/home";
-import NavbarResty from "./components/navbar/navbar";
+import Home from "./components/Home/Home";
+import NavbarResty from "./components/Navbar/Navbar";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import History from "./components/History/History";
 
 function App() {
   return (
@@ -15,13 +16,12 @@ function App() {
       <main>
         {/* <Home/> */}
         <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/signin" element={<Signin/>} />
-            <Route path="/signup" element={<Signup />} />
+          <Route exact path="/" element={<Home />} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/history" element={<History />} />
 
-
-
-          </Routes>
+        </Routes>
       </main>
       <footer bg="dark" variant="dark">
         <div className="text-center">All right is reserved</div>

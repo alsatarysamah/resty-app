@@ -1,47 +1,39 @@
-import Axios from "axios";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-// import { toast, ToastContainer } from "react-toastify";
-import { useContext, useEffect, useState } from "react";
-// import { Store } from "../store";
+import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import superAgent from "superagent";
 import base64 from "base-64";
 import * as axios from "axios";
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
 
+
 export default function Signin() {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const submitHandler = async (e) => {
     e.preventDefault();
-   
-      const options = {
-        url: "http://localhost:4000/signin",
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json;charset=UTF-8",
-          Authorization: `Basic ${base64.encode(`${email}:${password}`)}`,
-        },
-      };
 
-      axios(options)
-        .then((response) => {
-          sessionStorage.setItem(
-            "userInfo",
-            JSON.stringify(response.data.user)
-          );
-          navigate("/");
-        })
-        .catch((e) => {
-          toast.error("Invalid Username or Password");
-        });
-  
+    const options = {
+      url: "http://localhost:4000/signin",
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+        Authorization: `Basic ${base64.encode(`${email}:${password}`)}`,
+      },
+    };
+
+    axios(options)
+      .then((response) => {
+        sessionStorage.setItem("userInfo", JSON.stringify(response.data.user));
+        navigate("/");
+      })
+      .catch((e) => {
+        toast.error("Invalid Username or Password");
+      });
   };
 
   return (
