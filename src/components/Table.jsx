@@ -4,11 +4,12 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import useHistoryContext from '../useCon';
 
 
 export default function Table(props) {
-
-
+console.log( props.data[0].id)
+const {state}=useHistoryContext()
   const pagination = paginationFactory({
     page: 2,
     sizePerPage: 7,
@@ -30,9 +31,8 @@ export default function Table(props) {
   
   return (
     <div >
-      <BootstrapTable responsive hover={true}   keyField='id' data={props.data}  columns={props.columns}  pagination={pagination} />
+      <BootstrapTable responsive hover  keyField='id' data={props.data}  columns={props.columns}  pagination={pagination} />
     </div>
   );
 }
-
 

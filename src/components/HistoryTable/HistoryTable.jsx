@@ -5,12 +5,15 @@ import { Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import useHistoryContext from "../../useCon";
 
 export default function HistoryTable({historyRecords}) {
   const [users, setUsers] = useState(
     localStorage.getItem("users") ? localStorage.getItem("users") : []
   );
   const navigate = useNavigate();
+// const{state,dispatch}=
+const{state}=useHistoryContext()
 
  const handleDelete =(id)=>{
   console.log("delete");
@@ -50,14 +53,7 @@ export default function HistoryTable({historyRecords}) {
    
   ];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios.get("https://mstart.cleverapps.io/user");
-      localStorage.setItem("users", res.data);
-      setUsers(res.data);
-    };
-    fetchData();
-  }, []);
+  
   return (
     <div className="my-5">
       <h1>Users</h1>
@@ -73,7 +69,7 @@ export default function HistoryTable({historyRecords}) {
         </Button>
       </div>
       <div className="table-horiz-scroll">
-        <Table data={historyRecords} columns={columns} />
+        <Table data={state.historyRecords} columns={columns} />
       </div>
     </div>
   );

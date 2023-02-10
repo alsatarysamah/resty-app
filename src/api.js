@@ -2,6 +2,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 export const api =async (url, method, body) => {
+  console.log();
   const options = {
     url: url,
     method: method,
