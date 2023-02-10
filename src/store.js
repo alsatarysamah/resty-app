@@ -19,11 +19,9 @@ function reducer(state, action) {
       });
       return { ...state, historyRecords: arr };
     case "DEL":
-      console.log("Dellllllllllllllllllllllll 123456");
       const filtered = state?.historyRecords?.filter(
-        (item) => item.id != paylod.id
+        (item) => item.id != paylod
       );
-      console.log("Delllllllllllllllllllllllllllll  12");
       return { ...state, historyRecords: [...filtered] };
     default:
       return state;

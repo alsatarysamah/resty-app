@@ -9,14 +9,14 @@ import { api } from "../../api";
 import useHistoryContext from "../../useCon";
 
 export default function HistoryTable() {
-  const{state}=useHistoryContext();
+  const{state,dispatch}=useHistoryContext();
   console.log({state})
   const navigate = useNavigate();
 
  const handleDelete =async(id)=>{
   console.log("delete");
   await api(`http://localhost:4000/history/${id}`, "delete", "").then((data) => {
-
+dispatch({type:"DEL",paylod:id})
   });
 
  }
@@ -56,23 +56,11 @@ export default function HistoryTable() {
 
 
   return (
-    <div className="my-5">
-      <h1>Users</h1>
-      <div className="d-flex  justify-content-end my-3">
-        <Button
-          variant="primary"
-          size="mg"
-          onClick={() => {
-            navigate("/newuser");
-          }}
-        >
-          New User
-        </Button>
-      </div>
-      <div className="table-horiz-scroll">
+ 
+      <div className="table-horiz-scroll mt-3">
         <Table data={state.historyRecords} columns={columns} />
       </div>
-    </div>
+    
   );
 }
 //defaultSorted={defaultSorted}
