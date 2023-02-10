@@ -1,34 +1,52 @@
-.btn-add{
-    color: blue;
+.btn-add {
+  color: blue;
 }
 
 .table-horiz-scroll {
-    overflow-x:auto;
-   
- }
-
- table {
-    table-layout: auto;
-    
-    word-wrap: break-word;
+  overflow-x: auto;
 }
-table td{
-   text-align: center;
 
+table {
+  table-layout: auto;
+
+  word-wrap: break-word;
 }
-table th{
-    text-align: center;
- }
+table td {
+  text-align: center;
+}
+table th {
+  text-align: center;
+}
 
-    table th, table td {
-        overflow: hidden;
-    }
-    @media screen and (max-width: 1200px) {
-        body {
-          overflow: visible;
-        } table {
-            width: 769px !important;
-            font-size: small;
-        }
-    
-      }
+table th,
+table td {
+  overflow: hidden;
+}
+@media screen and (max-width: 1200px) {
+  body {
+    overflow: visible;
+  }
+  table {
+    width: 769px !important;
+    font-size: small;
+  }
+}
+.method {
+  border-radius: 10%;
+}
+.put {
+  background-color: #86A3B8;
+}
+.get {
+  background-color: #E8D2A6;
+}
+.post{
+    background-color: #F2921D;
+}
+.delete{
+    background-color: #F55050;
+}
+.del-btn{
+    background-color: red;
+    border: 0px;
+}

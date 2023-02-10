@@ -11,7 +11,7 @@ export default function Table(props) {
 
   const pagination = paginationFactory({
     page: 1,
-    sizePerPage: 7,
+    sizePerPage: 5,
     nextPageText: '>',
     prePageText: '<',
     showTotal: false,
@@ -25,12 +25,13 @@ export default function Table(props) {
     onSizePerPageChange: function (page, sizePerPage) {
       console.log('page', page);
       console.log('sizePerPage', sizePerPage);
-    }
+    },
+   
   });
   
   return (
     <div >
-      <BootstrapTable responsive hover={true}   keyField='id' data={props.data}  columns={props.columns}  pagination={pagination} />
+      <BootstrapTable responsive hover={true}   keyField='id' data={props.data}  columns={props.columns}  pagination={pagination} rowEvents={ props.rowEvents } />
     </div>
   );
 }

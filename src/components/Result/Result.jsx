@@ -17,7 +17,7 @@ import { Card, Col } from "react-bootstrap";
 
 function Result({ result }) {
   return (
-    <Col md={8} lg={6} xs={8}>
+    <Col md={8} lg={8} xs={8}>
       <div>
         <Card className="result mt-3">
           <Card.Body>
