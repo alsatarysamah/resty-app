@@ -1,6 +1,5 @@
 import { useReducer } from "react";
 import { createContext } from "react";
-//JSON.parse(sessionStorage.getItem("history"))?JSON.parse(sessionStorage.getItem("history")):
 const inisialState = {
   historyRecords: JSON.parse(sessionStorage.getItem("history")) || [],
 };

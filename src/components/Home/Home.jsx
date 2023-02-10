@@ -8,11 +8,8 @@ import Result from "../Result/Result";
 import { api } from "../../api";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
-import useHistoryContext from "../../useCon";
 
 function Home() {
-  const {state,dispatch}=useHistoryContext()
-
   const [method, setMethod] = useState("get");
   const [body, setBody] = useState({});
   const [url, setUrl] = useState("");
@@ -32,11 +29,22 @@ function Home() {
     };
     console.log({ record });
     await api("http://localhost:4000/history", "post", record).then((data) => {
-      dispatch({type:"CREATE",paylod:record})
-      console.log(state.historyRecords)
+      
       console.log({ data });
     });
   };
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await api("http://localhost:4000/history", "get", "").then((data) => {
+      
+        sessionStorage.setItem("history",JSON.stringify(data))
+      });
+      
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="mt-5">

@@ -1,53 +1,34 @@
-.btn-add {
-  color: blue;
+.btn-add{
+    color: blue;
 }
 
 .table-horiz-scroll {
-  overflow-x: auto;
-}
+    overflow-x:auto;
+   
+ }
 
-table {
-  table-layout: auto;
+ table {
+    table-layout: auto;
+    
+    word-wrap: break-word;
+}
+table td{
+   text-align: center;
 
-  word-wrap: break-word;
 }
-table td {
-  text-align: center;
-}
-table th {
-  text-align: center;
-}
+table th{
+    text-align: center;
+ }
 
-table th,
-table td {
-  overflow: hidden;
-}
-@media screen and (max-width: 1200px) {
-  body {
-    overflow: visible;
-  }
-  table {
-    width: 769px !important;
-    font-size: small;
-  }
-}
-
-.method {
-  border-radius: 30%;
-}
-.put {
-  background-color: aqua;
-}
-.get {
-  background-color: blanchedalmond;
-}
-.delete {
-  background-color: red;
-}
-.post {
-  background-color: green;
-}
-.delete-btn{
-  background-color: red;
-  border: 0px;
-}
+    table th, table td {
+        overflow: hidden;
+    }
+    @media screen and (max-width: 1200px) {
+        body {
+          overflow: visible;
+        } table {
+            width: 769px !important;
+            font-size: small;
+        }
+    
+      }
