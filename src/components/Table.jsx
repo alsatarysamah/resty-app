@@ -10,7 +10,7 @@ export default function Table(props) {
 
 
   const pagination = paginationFactory({
-    page: 2,
+    page: 1,
     sizePerPage: 7,
     nextPageText: '>',
     prePageText: '<',

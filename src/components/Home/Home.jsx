@@ -34,6 +34,18 @@ function Home() {
     });
   };
 
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await api("http://localhost:4000/history", "get", "").then((data) => {
+      
+        sessionStorage.setItem("history",JSON.stringify(data))
+      });
+      
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className="mt-5">
       <Helmet>

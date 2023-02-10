@@ -5,16 +5,20 @@ import { Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../api";
+import useHistoryContext from "../../useCon";
 
-export default function HistoryTable({historyRecords}) {
-  const [users, setUsers] = useState(
-    localStorage.getItem("users") ? localStorage.getItem("users") : []
-  );
+export default function HistoryTable() {
+  const{state}=useHistoryContext();
+  console.log({state})
   const navigate = useNavigate();
 
- const handleDelete =(id)=>{
+ const handleDelete =async(id)=>{
   console.log("delete");
-  // axios.delete(`https://mstart.cleverapps.io/user/${id}`).then ((e)=>{})
+  await api(`http://localhost:4000/history/${id}`, "delete", "").then((data) => {
+
+  });
+
  }
 
   const editHistory = (row) => {
@@ -34,7 +38,7 @@ export default function HistoryTable({historyRecords}) {
   const deleteFormatter = (cell, row, rowIndex, formatExtraData) => {
     return (
       <Button onClick={()=>handleDelete(row.id)} >
-     <i class="fa fa-trash " ></i>
+     <i className="fa fa-trash " ></i>
 </Button>
     );
   };
@@ -50,14 +54,7 @@ export default function HistoryTable({historyRecords}) {
    
   ];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios.get("https://mstart.cleverapps.io/user");
-      localStorage.setItem("users", res.data);
-      setUsers(res.data);
-    };
-    fetchData();
-  }, []);
+
   return (
     <div className="my-5">
       <h1>Users</h1>
@@ -73,7 +70,7 @@ export default function HistoryTable({historyRecords}) {
         </Button>
       </div>
       <div className="table-horiz-scroll">
-        <Table data={historyRecords} columns={columns} />
+        <Table data={state.historyRecords} columns={columns} />
       </div>
     </div>
   );
