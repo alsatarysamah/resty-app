@@ -7,19 +7,26 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../api";
 import useHistoryContext from "../../useCon";
+import ModalDialog from "../Modal/Modal";
 
 export default function HistoryTable() {
-  const{state}=useHistoryContext();
-  console.log({state})
+  const { state, dispatch } = useHistoryContext();
+  const [modalShow, setModalShow] = useState(false);
+  const [item, setItem] = useState();
+  const [delClick, setDelClick] = useState(true);
+console.log({delClick})
+  console.log({ state });
   const navigate = useNavigate();
 
- const handleDelete =async(id)=>{
-  console.log("delete");
-  await api(`http://localhost:4000/history/${id}`, "delete", "").then((data) => {
-
-  });
-
- }
+  const handleDelete = async (id) => {
+    console.log("click delete");
+    setDelClick(true);
+    await api(`http://localhost:4000/history/${id}`, "delete", "").then(
+      (data) => {
+        dispatch({ type: "DEL", paylod: id });
+      }
+    );
+  };
 
   const editHistory = (row) => {
     // navigate("/newaccount", { state: { user: row } });
@@ -27,6 +34,7 @@ export default function HistoryTable() {
   const linkFollow = (cell, row, rowIndex, formatExtraData) => {
     return (
       <Button
+        className="general-btn"
         onClick={() => {
           editHistory(row);
         }}
@@ -37,43 +45,57 @@ export default function HistoryTable() {
   };
   const deleteFormatter = (cell, row, rowIndex, formatExtraData) => {
     return (
-      <Button onClick={()=>handleDelete(row.id)} >
-     <i className="fa fa-trash " ></i>
-</Button>
+      <Button className="general-btn" onClick={() => handleDelete(row.id)}>
+        <i className="fa fa-trash "></i>
+      </Button>
     );
   };
- 
- 
+  const methodFormatter = (cell, row, rowIndex, formatExtraData) => {
+    return <p className={`method ${cell}`}>{cell}</p>;
+  };
+
   const columns = [
     { dataField: "id", text: "Id", sort: true, width: 100 },
     { dataField: "url", text: "URL", sort: true },
-    { dataField: "method", text: "Method", sort: true },
+    {
+      dataField: "method",
+      text: "Method",
+      sort: true,
+      formatter: methodFormatter,
+    },
     { dataField: "delete", text: "Delete", formatter: deleteFormatter },
     { dataField: "edit", text: "Edit", formatter: linkFollow },
-
-   
   ];
+  const rowEvents = {
+    onClick: (e, row, rowIndex) => {
+      // console.log({row})
+      console.log("click row");
+      if (!delClick) {
+        setModalShow(true);
 
+        setItem(row);
+    setDelClick(false);
+
+      }
+
+    },
+
+  };
 
   return (
-    <div className="my-5">
-      <h1>Users</h1>
-      <div className="d-flex  justify-content-end my-3">
-        <Button
-          variant="primary"
-          size="mg"
-          onClick={() => {
-            navigate("/newuser");
-          }}
-        >
-          New User
-        </Button>
-      </div>
-      <div className="table-horiz-scroll">
-        <Table data={state.historyRecords} columns={columns} />
-      </div>
+    <div className="table-horiz-scroll mt-3">
+      <Table
+        data={state.historyRecords}
+        columns={columns}
+        rowEvents={rowEvents}
+      />
+      {modalShow && (
+        <ModalDialog
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          item={item}
+        />
+      )}
     </div>
   );
 }
-//defaultSorted={defaultSorted}
-//

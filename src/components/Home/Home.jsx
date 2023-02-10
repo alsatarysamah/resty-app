@@ -8,8 +8,10 @@ import Result from "../Result/Result";
 import { api } from "../../api";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
+import useHistoryContext from "../../useCon";
 
 function Home() {
+  const {dispatch}=useHistoryContext()
   const [method, setMethod] = useState("get");
   const [body, setBody] = useState({});
   const [url, setUrl] = useState("");
@@ -29,7 +31,7 @@ function Home() {
     };
     console.log({ record });
     await api("http://localhost:4000/history", "post", record).then((data) => {
-      
+      dispatch({type:"CREATE",paylod:data})
       console.log({ data });
     });
   };

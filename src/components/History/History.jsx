@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
-import { json } from "react-router-dom";
-import { api } from "../../api";
 import HistoryTable from "../HistoryTable/HistoryTable";
 import Search from "../Search";
 import "./history.css";
