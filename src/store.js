@@ -6,11 +6,10 @@ const inisialState = {
 const historyContext = createContext();
 
 function reducer(state, action) {
-  console.log({state});
   const { type, paylod } = action;
   switch (type) {
     case "CREATE":
-      return { ...state, historyRecords: [...state?.historyRecords, paylod] };
+      return { ...state, historyRecords: [...state.historyRecords, paylod] };
     case "EDIT":
       let arr = state?.book?.map((history) => {
         if (history.id === paylod.id)
@@ -22,6 +21,8 @@ function reducer(state, action) {
       const filtered = state?.historyRecords?.filter(
         (item) => item.id != paylod
       );
+      sessionStorage.setItem("history",JSON.stringify(filtered))
+
       return { ...state, historyRecords: [...filtered] };
     default:
       return state;

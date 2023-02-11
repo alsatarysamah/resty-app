@@ -11,42 +11,39 @@ import { Helmet } from "react-helmet-async";
 import useHistoryContext from "../../useCon";
 
 function Home() {
-  const {dispatch}=useHistoryContext()
+  const { state, dispatch } = useHistoryContext();
   const [method, setMethod] = useState("get");
   const [body, setBody] = useState({});
-  const [url, setUrl] = useState("");
-  const [result, setResult] = useState();
+  const [url, setUrl] = useState();
+  const [response, setResponse] = useState();
 
-  const submitHandler = async () => {
+  const submitHandler = async (e) => {
+    let res;
     await api(url, method, body).then((data) => {
-      setResult(data);
-      console.log({ result });
+      res = data;
+      setResponse(data);
     });
-    console.log("result==>",typeof result);
+
     const record = {
       url: url,
       method: method,
-      response: (result)||null,
+      response: res,
       userId: JSON.parse(sessionStorage.getItem("userInfo")).id,
     };
-    console.log({ record });
-    await api("http://localhost:4000/history", "post", record).then((data) => {
-      dispatch({type:"CREATE",paylod:data})
-      console.log({ data });
+
+    api("http://localhost:4000/history", "post", record).then((data) => {
+      dispatch({ type: "CREATE", paylod: data });
     });
   };
-
 
   useEffect(() => {
     const fetchData = async () => {
       await api("http://localhost:4000/history", "get", "").then((data) => {
-      
-        sessionStorage.setItem("history",JSON.stringify(data))
+        sessionStorage.setItem("history", JSON.stringify(data));
       });
-      
     };
     fetchData();
-  }, []);
+  }, [state]);
 
   return (
     <div className="mt-5">
@@ -55,7 +52,8 @@ function Home() {
       </Helmet>
       <Row className=" d-flex flex-column justify-content-center align-items-center">
         <p>https://pokeapi.co/api/v2/pokemon</p>
-
+        <p>http://localhost:4000/history</p>
+        <p>https://api.covid19api.com/summary</p>
         <Search
           urlSetting={setUrl}
           submitHandler={submitHandler}
@@ -66,7 +64,7 @@ function Home() {
 
         <Body setBody={setBody} />
 
-        <Result result={result} />
+        <Result result={response} />
       </Row>
     </div>
   );
