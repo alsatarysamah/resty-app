@@ -1,12 +1,12 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-
+import "./navbar.css"
 function CollapsibleExample() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="white" variant="white">
+    <Navbar className='nav' collapseOnSelect expand="lg" bg="white" variant="white">
       <Container>
-        <Navbar.Brand href="/">Resty</Navbar.Brand>
+        <Navbar.Brand className='nav' href="/">Resty</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto ">

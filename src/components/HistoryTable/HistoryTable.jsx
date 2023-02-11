@@ -13,14 +13,8 @@ export default function HistoryTable() {
   const { state, dispatch } = useHistoryContext();
   const [modalShow, setModalShow] = useState(false);
   const [item, setItem] = useState();
-  const [delClick, setDelClick] = useState(true);
-console.log({delClick})
-  console.log({ state });
-  const navigate = useNavigate();
 
   const handleDelete = async (id) => {
-    console.log("click delete");
-    setDelClick(true);
     await api(`http://localhost:4000/history/${id}`, "delete", "").then(
       (data) => {
         dispatch({ type: "DEL", paylod: id });
@@ -56,30 +50,22 @@ console.log({delClick})
 
   const columns = [
     { dataField: "id", text: "Id", sort: true, width: 100 },
-    { dataField: "url", text: "URL", sort: true },
+    { dataField: "url", text: "URL" },
     {
       dataField: "method",
       text: "Method",
-      sort: true,
+
       formatter: methodFormatter,
     },
     { dataField: "delete", text: "Delete", formatter: deleteFormatter },
     { dataField: "edit", text: "Edit", formatter: linkFollow },
   ];
   const rowEvents = {
-    onClick: (e, row, rowIndex) => {
-      // console.log({row})
-      console.log("click row");
-      if (!delClick) {
-        setModalShow(true);
+    onDoubleClick: (e, row, rowIndex) => {
+      setItem(row);
 
-        setItem(row);
-    setDelClick(false);
-
-      }
-
+      setModalShow(true);
     },
-
   };
 
   return (
