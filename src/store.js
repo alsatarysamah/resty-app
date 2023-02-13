@@ -2,14 +2,15 @@ import { useReducer } from "react";
 import { createContext } from "react";
 const inisialState = {
   historyRecords: JSON.parse(sessionStorage.getItem("history")) || [],
-  // currentRecored: {
-  //   url: "",
-  //   method: "",
-  //   result: " ",
-  //   username: "",
-  //   password: "",
-  //   token: "",
-  // },
+  currentRecored: {
+    url: "",
+    method: "",
+    body:"",
+    result: " ",
+    username: "",
+    password: "",
+    token: "",
+  },
 };
 const historyContext = createContext();
 
@@ -32,6 +33,15 @@ function reducer(state, action) {
       sessionStorage.setItem("history", JSON.stringify(filtered));
 
       return { ...state, historyRecords: [...filtered] };
+    case "SET-USER":
+      return {
+        ...state,
+        currentRecored: {
+          ...state.currentRecored,
+          username: payload.username,
+          password: payload.password,
+        },
+      };
     default:
       return state;
   }

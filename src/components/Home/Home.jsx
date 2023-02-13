@@ -17,6 +17,8 @@ function Home() {
   const [url, setUrl] = useState();
   const [response, setResponse] = useState();
 
+
+  console.log({state});
   const submitHandler = async (e) => {
     let res;
     await api(url, method, body).then((data) => {
