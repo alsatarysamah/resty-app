@@ -32,7 +32,7 @@ function Home() {
     };
 
     api("http://localhost:4000/history", "post", record).then((data) => {
-      dispatch({ type: "CREATE", paylod: data });
+      dispatch({ type: "CREATE", payload: data });
     });
   };
 
@@ -62,7 +62,7 @@ function Home() {
 
         <MethodTab methodSetting={setMethod} />
 
-        <Body setBody={setBody} />
+        {/* <Body setBody={setBody} /> */}
 
         <Result result={response} />
       </Row>

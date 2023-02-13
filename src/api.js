@@ -5,6 +5,7 @@ export const api =async (url, method, body) => {
 
   const options = {
     url: url,
+    
     method: method,
     headers: {
       Accept: "application/json",
@@ -20,17 +21,18 @@ try{
  return response.data;
 }catch(e){
        console.log(e);
-       toast.error("Invalid URL ")
-  // let arr = JSON.parse(e.request?.responseText).errors;
-
-  // arr.forEach((element) => {
     
-  //   toast.error(element.msg);
-  // });
+       
+  let arr = JSON.parse(e.request?.responseText).errors;
 
-  // arr.length > 0
-  //   ? toast.error(arr[1])
-  //   : toast.error(e.request.responseText);
+  arr.forEach((element) => {
+    
+    toast.error(element.msg);
+  });
+
+  arr.length > 0
+    ? toast.error(arr[1])
+    : toast.error(e.request.responseText);
 }
  
   

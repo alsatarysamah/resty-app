@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Col, Form } from "react-bootstrap";
 
-function Body(props) {
+function Body({title,setBody}) {
   function bodyHandler(e) {
-    props.setBody(e.target.value);
+    setBody(e.target.value);
   }
   return (
-    <Col md={6} lg={3} xs={6}>
-      <div>
+    <Col md={6} lg={8} xs={8}>
+      <div className="mx-5">
         <Form>
           <Form.Group className="mb-3">
-            <Form.Label>Body --JSON Content--</Form.Label>
+            <Form.Label>{title}</Form.Label>
             <Form.Control as="textarea" rows={4} onChange={bodyHandler} />
           </Form.Group>
         </Form>

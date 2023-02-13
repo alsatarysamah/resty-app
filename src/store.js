@@ -2,26 +2,34 @@ import { useReducer } from "react";
 import { createContext } from "react";
 const inisialState = {
   historyRecords: JSON.parse(sessionStorage.getItem("history")) || [],
+  // currentRecored: {
+  //   url: "",
+  //   method: "",
+  //   result: " ",
+  //   username: "",
+  //   password: "",
+  //   token: "",
+  // },
 };
 const historyContext = createContext();
 
 function reducer(state, action) {
-  const { type, paylod } = action;
+  const { type, payload } = action;
   switch (type) {
     case "CREATE":
-      return { ...state, historyRecords: [...state.historyRecords, paylod] };
+      return { ...state, historyRecords: [...state.historyRecords, payload] };
     case "EDIT":
       let arr = state?.book?.map((history) => {
-        if (history.id === paylod.id)
-          return { ...history, title: paylod.title };
+        if (history.id === payload.id)
+          return { ...history, title: payload.title };
         return history;
       });
       return { ...state, historyRecords: arr };
     case "DEL":
       const filtered = state?.historyRecords?.filter(
-        (item) => item.id != paylod
+        (item) => item.id != payload
       );
-      sessionStorage.setItem("history",JSON.stringify(filtered))
+      sessionStorage.setItem("history", JSON.stringify(filtered));
 
       return { ...state, historyRecords: [...filtered] };
     default:
