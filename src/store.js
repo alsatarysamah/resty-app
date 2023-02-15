@@ -42,6 +42,14 @@ function reducer(state, action) {
           password: payload.password,
         },
       };
+      case "SET-TOKEN":
+        return {
+          ...state,
+          currentRecored: {
+            ...state.currentRecored,
+           token:payload.token
+          },
+        };
     default:
       return state;
   }

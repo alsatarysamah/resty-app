@@ -4,13 +4,17 @@ import base64 from "base-64";
 
 export const api = async (url, method, body, username, password) => {
   let authorization = "";
+  console.log( {username});
+  console.log({password});
+  console.log({url});
   if (url.includes("signin")) {
-    authorization = `Basic ${base64.encode(`${username}:${password}`)}`;
+    authorization = ` Basic ${base64.encode(`${username}:${password}`)}`;
   } else {
     authorization = `"Bearer " + ${
       JSON.parse(sessionStorage.getItem("userInfo")).token
     }`;
   }
+  console.log(authorization);
   const options = {
     url: url,
 
@@ -20,6 +24,11 @@ export const api = async (url, method, body, username, password) => {
       "Content-Type": "application/json;charset=UTF-8",
       Authorization: authorization,
     },
+    // headers: {
+    //   Accept: "application/json",
+    //   "Content-Type": "application/json;charset=UTF-8",
+    //   Authorization: `Basic ${base64.encode(`${username}:${password}`)}`,
+    // },
     data: body,
   };
   try {

@@ -17,11 +17,11 @@ function Home() {
   const [url, setUrl] = useState();
   const [response, setResponse] = useState();
 
-
+const {username,password}=state.currentRecored;
   console.log({state});
   const submitHandler = async (e) => {
     let res;
-    await api(url, method, body).then((data) => {
+    await api(url, method, body,username,password).then((data) => {
       res = data;
       setResponse(data);
     });

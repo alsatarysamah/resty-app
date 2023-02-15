@@ -4,11 +4,16 @@ import { Col, Tab, Tabs } from "react-bootstrap";
 import Result from "../Result/Result";
 import Body from "../Body";
 import BasicAuthForm from '../BasicAuthForm/BasicAuthForm';
+import useHistoryContext from "../../useCon";
 
 
 function MethodTab(props) {
   const [key, setKey] = useState("get");
+  const {dispatch}=useHistoryContext()
+function tokenHandler(token) {
 
+  dispatch({type:"SET-TOKEN",payload:{token:token}})
+}
   return (
     <Col md={8} lg={6} xs={12}>
       <div>
@@ -39,7 +44,7 @@ function MethodTab(props) {
           >
           <BasicAuthForm/>
           </Tab>
-          <Tab tabClassName="method-tab" eventKey="berear" title="BEARER"><Body title="Token"/></Tab>
+          <Tab tabClassName="method-tab" eventKey="berear" title="BEARER"><Body title="Token" setBody={tokenHandler}/></Tab>
         </Tabs>
       </div>
     </Col>

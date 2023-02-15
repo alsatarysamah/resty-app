@@ -1,15 +1,10 @@
 #json-pretty{
-    /* value: {color: red;} */
-    height: auto;
-    /* height: max-content;
-    border: 2px solid rgb(154, 50, 132);
-    text-align: justify;
-    margin-bottom: 100px; */
+ 
    
 }
 .result{
     overflow-x:scroll; 
-    /* overflow-y:visible; */
+   
  height: 300px;
 }
   .__json-key__
