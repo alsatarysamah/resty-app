@@ -4,8 +4,10 @@ import { Button, Col, Form } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
 
 function Search({ urlSetting, submitHandler,btnName }) {
+  const [item, setItem] = useState();
   const goHandler = (e) => {
     e.preventDefault();
+    // urlSetting(item)
     submitHandler();
   
   };

@@ -2,28 +2,54 @@ import { useReducer } from "react";
 import { createContext } from "react";
 const inisialState = {
   historyRecords: JSON.parse(sessionStorage.getItem("history")) || [],
+  currentRecored: {
+    url: "",
+    method: "",
+    body:"",
+    result: " ",
+    username: "",
+    password: "",
+    token: "",
+  },
 };
 const historyContext = createContext();
 
 function reducer(state, action) {
-  const { type, paylod } = action;
+  const { type, payload } = action;
   switch (type) {
     case "CREATE":
-      return { ...state, historyRecords: [...state.historyRecords, paylod] };
+      return { ...state, historyRecords: [...state.historyRecords, payload] };
     case "EDIT":
       let arr = state?.book?.map((history) => {
-        if (history.id === paylod.id)
-          return { ...history, title: paylod.title };
+        if (history.id === payload.id)
+          return { ...history, title: payload.title };
         return history;
       });
       return { ...state, historyRecords: arr };
     case "DEL":
       const filtered = state?.historyRecords?.filter(
-        (item) => item.id != paylod
+        (item) => item.id != payload
       );
-      sessionStorage.setItem("history",JSON.stringify(filtered))
+      sessionStorage.setItem("history", JSON.stringify(filtered));
 
       return { ...state, historyRecords: [...filtered] };
+    case "SET-USER":
+      return {
+        ...state,
+        currentRecored: {
+          ...state.currentRecored,
+          username: payload.username,
+          password: payload.password,
+        },
+      };
+      case "SET-TOKEN":
+        return {
+          ...state,
+          currentRecored: {
+            ...state.currentRecored,
+           token:payload.token
+          },
+        };
     default:
       return state;
   }

@@ -3,8 +3,7 @@ import "./HistoryTable.css";
 import Table from "../../components/Table";
 import { Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+
 import { api } from "../../api";
 import useHistoryContext from "../../useCon";
 import ModalDialog from "../Modal/Modal";
@@ -17,7 +16,7 @@ export default function HistoryTable() {
   const handleDelete = async (id) => {
     await api(`http://localhost:4000/history/${id}`, "delete", "").then(
       (data) => {
-        dispatch({ type: "DEL", paylod: id });
+        dispatch({ type: "DEL", payload: id });
       }
     );
   };
@@ -73,6 +72,7 @@ export default function HistoryTable() {
       <Table
         data={state.historyRecords}
         columns={columns}
+
         rowEvents={rowEvents}
       />
       {modalShow && (

@@ -17,9 +17,11 @@ function Home() {
   const [url, setUrl] = useState();
   const [response, setResponse] = useState();
 
+const {username,password}=state.currentRecored;
+  console.log({state});
   const submitHandler = async (e) => {
     let res;
-    await api(url, method, body).then((data) => {
+    await api(url, method, body,username,password).then((data) => {
       res = data;
       setResponse(data);
     });
@@ -32,7 +34,7 @@ function Home() {
     };
 
     api("http://localhost:4000/history", "post", record).then((data) => {
-      dispatch({ type: "CREATE", paylod: data });
+      dispatch({ type: "CREATE", payload: data });
     });
   };
 
@@ -62,7 +64,7 @@ function Home() {
 
         <MethodTab methodSetting={setMethod} />
 
-        <Body setBody={setBody} />
+        {/* <Body setBody={setBody} /> */}
 
         <Result result={response} />
       </Row>
