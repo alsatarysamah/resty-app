@@ -3,17 +3,15 @@ import React, { useState } from "react";
 import { Col, Tab, Tabs } from "react-bootstrap";
 import Result from "../Result/Result";
 import Body from "../Body";
-import BasicAuthForm from '../BasicAuthForm/BasicAuthForm';
-import useHistoryContext from "../../useCon";
-
+import BasicAuthForm from "../BasicAuthForm/BasicAuthForm";
+import { setItem } from "../../sessionStorage";
 
 function MethodTab(props) {
   const [key, setKey] = useState("get");
-  const {dispatch}=useHistoryContext()
-function tokenHandler(token) {
 
-  dispatch({type:"SET-TOKEN",payload:{token:token}})
-}
+  function tokenHandler(token) {
+    setItem("app-token", token);
+  }
   return (
     <Col md={8} lg={6} xs={12}>
       <div>
@@ -28,7 +26,7 @@ function tokenHandler(token) {
         >
           <Tab tabClassName="method-tab" eventKey="get" title="GET"></Tab>
           <Tab tabClassName="method-tab" eventKey="post" title="POST">
-            <Body title="Body --JSON content"/>
+            <Body title="Body --JSON content" />
           </Tab>
           <Tab tabClassName="method-tab" eventKey="put" title="PUT">
             <Body />
@@ -38,13 +36,13 @@ function tokenHandler(token) {
             tabClassName="method-tab"
             eventKey="basic"
             title="BASIC AUTH"
-            onClick={() => {
-              console.log("tab click");
-            }}
+            
           >
-          <BasicAuthForm/>
+            <BasicAuthForm />
           </Tab>
-          <Tab tabClassName="method-tab" eventKey="berear" title="BEARER"><Body title="Token" setBody={tokenHandler}/></Tab>
+          <Tab tabClassName="method-tab" eventKey="berear" title="BEARER">
+            <Body title="Token" setBody={tokenHandler} />
+          </Tab>
         </Tabs>
       </div>
     </Col>

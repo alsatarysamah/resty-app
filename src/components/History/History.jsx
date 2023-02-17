@@ -6,14 +6,11 @@ import HistoryTable from "../HistoryTable/HistoryTable";
 import Search from "../Search";
 import "./history.css";
 
-function History(props) {
+function History() {
   const searchHandler = async (url) => {
-   console.log("search")
+    console.log("search");
   };
 
-
- 
-  
   return (
     <div className="d-flex flex-column site mt-5">
       <Helmet>
@@ -25,10 +22,8 @@ function History(props) {
           btnName="Search"
           className="mt-5"
         />
-        {/* <historyRecords/> */}
         <Col md={8} lg={10} xs={8}>
-          <HistoryTable  />
-          
+          <HistoryTable />
         </Col>
       </Row>
     </div>

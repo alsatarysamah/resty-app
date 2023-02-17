@@ -6,7 +6,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 
 
-export default function Table(props) {
+export default function Table({data,columns,rowEvents}) {
 
 
   const pagination = paginationFactory({
@@ -31,7 +31,7 @@ export default function Table(props) {
   
   return (
     <div >
-      <BootstrapTable responsive hover={true}   keyField='id' data={props.data}  columns={props.columns}  pagination={pagination} rowEvents={ props.rowEvents } />
+      <BootstrapTable responsive hover={true}   keyField='id' data={data}  columns={columns}  pagination={pagination} rowEvents={ rowEvents } />
     </div>
   );
 }
