@@ -5,18 +5,23 @@ import { Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
 import { api } from "../../api";
-import useHistoryContext from "../../useCon";
 import ModalDialog from "../Modal/Modal";
+import { useDispatch, useSelector } from "react-redux";
+import { delHistory } from "../../store";
+import { getItem } from "../../sessionStorage";
 
 export default function HistoryTable() {
-  const { state, dispatch } = useHistoryContext();
+  // const { state, dispatch } = useHistoryContext();
   const [modalShow, setModalShow] = useState(false);
   const [item, setItem] = useState();
+  const historyRecords=useSelector((state)=>{return state.history})
+
+  const dispatch=useDispatch();
 
   const handleDelete = async (id) => {
-    await api(`http://localhost:4000/history/${id}`, "delete", "").then(
+    await api(`http://localhost:4000/history/${id}`, "delete", "","","",JSON.parse(getItem("userInfo")).token).then(
       (data) => {
-        dispatch({ type: "DEL", payload: id });
+        dispatch(delHistory(id));
       }
     );
   };
@@ -67,10 +72,12 @@ export default function HistoryTable() {
     },
   };
 
+
+ 
   return (
     <div className="table-horiz-scroll mt-3">
       <Table
-        data={state.historyRecords}
+        data={historyRecords}
         columns={columns}
 
         rowEvents={rowEvents}

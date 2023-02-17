@@ -7,18 +7,19 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import "react-toastify/dist/ReactToastify.css";
-import { HistoryProvieder } from "./store";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <HistoryProvieder>
+    <Provider store={store}>
       <BrowserRouter>
         <HelmetProvider>
           <App />
         </HelmetProvider>
       </BrowserRouter>
-    </HistoryProvieder>
+    </Provider>
   </React.StrictMode>
 );
 

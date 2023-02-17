@@ -8,20 +8,28 @@ import Result from "../Result/Result";
 import { api } from "../../api";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
-import useHistoryContext from "../../useCon";
+import { getItem } from "../../sessionStorage";
+import { useDispatch, useSelector } from "react-redux";
+import { addHistory } from "../../store/index";
 
 function Home() {
-  const { state, dispatch } = useHistoryContext();
   const [method, setMethod] = useState("get");
   const [body, setBody] = useState({});
   const [url, setUrl] = useState();
   const [response, setResponse] = useState();
+  const dispatch = useDispatch();
+  const historyRecords=useSelector((state)=>{return state.history})
 
-const {username,password}=state.currentRecored;
-  console.log({state});
   const submitHandler = async (e) => {
     let res;
-    await api(url, method, body,username,password).then((data) => {
+    await api(
+      url,
+      method,
+      body,
+      getItem("username"),
+      getItem("password"),
+      getItem("app-token"),
+    ).then((data) => {
       res = data;
       setResponse(data);
     });
@@ -30,23 +38,28 @@ const {username,password}=state.currentRecored;
       url: url,
       method: method,
       response: res,
-      userId: JSON.parse(sessionStorage.getItem("userInfo")).id,
+      userId: JSON.parse(getItem("userInfo")).id,
     };
 
-    api("http://localhost:4000/history", "post", record).then((data) => {
-      dispatch({ type: "CREATE", payload: data });
+    api(
+      "http://localhost:4000/history",
+      "post",
+      record,
+      "",
+      "",
+      JSON.parse(getItem("userInfo")).token
+    ).then((data) => {
+      dispatch(addHistory(data));
     });
   };
-
   useEffect(() => {
     const fetchData = async () => {
-      await api("http://localhost:4000/history", "get", "").then((data) => {
+      await api("http://localhost:4000/history", "get", "","","",JSON.parse(getItem("userInfo")).token).then((data) => {
         sessionStorage.setItem("history", JSON.stringify(data));
       });
     };
     fetchData();
-  }, [state]);
-
+  }, [historyRecords]);
   return (
     <div className="mt-5">
       <Helmet>
@@ -64,7 +77,6 @@ const {username,password}=state.currentRecored;
 
         <MethodTab methodSetting={setMethod} />
 
-        {/* <Body setBody={setBody} /> */}
 
         <Result result={response} />
       </Row>

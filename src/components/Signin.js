@@ -29,6 +29,7 @@ export default function Signin() {
     axios(options)
       .then((response) => {
         sessionStorage.setItem("userInfo", JSON.stringify(response.data.user));
+      
         navigate("/");
       })
       .catch((e) => {
