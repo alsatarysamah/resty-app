@@ -1,16 +1,15 @@
 import "./method.css";
 import React, { useState } from "react";
 import { Col, Tab, Tabs } from "react-bootstrap";
-import Result from "../Result/Result";
 import Body from "../Body";
 import BasicAuthForm from "../BasicAuthForm/BasicAuthForm";
 import { setItem } from "../../sessionStorage";
 
-function MethodTab(props) {
+function MethodTab({methodSetting,setBody}) {
   const [key, setKey] = useState("get");
 
-  function tokenHandler(token) {
-    setItem("app-token", token);
+  const tokenHandler =(token)=> {
+    setItem("app-token",token );
   }
   return (
     <Col md={8} lg={6} xs={12}>
@@ -20,13 +19,13 @@ function MethodTab(props) {
           activeKey={key}
           onSelect={(key) => {
             setKey(key);
-            props.methodSetting(key);
+           methodSetting(key);
           }}
           className=" d-flex justify-content-center my-3 mx-5 tabs"
         >
           <Tab tabClassName="method-tab" eventKey="get" title="GET"></Tab>
           <Tab tabClassName="method-tab" eventKey="post" title="POST">
-            <Body title="Body --JSON content" />
+            <Body title="Body --JSON content" setBody={setBody}/>
           </Tab>
           <Tab tabClassName="method-tab" eventKey="put" title="PUT">
             <Body />
