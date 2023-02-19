@@ -2,17 +2,17 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import base64 from "base-64";
 
-export const api = async (url, method, body, username, password, token) => {
-  console.log({username});
-  console.log({password});
-  console.log({url});
+export const api = async (url, method,token, body, username, password) => {
+  console.log({ username });
+  console.log({ password });
+  console.log({ url });
   let authorization = "";
   if (url.includes("signin")) {
     authorization = ` Basic ${base64.encode(`${username}:${password}`)}`;
   } else {
     authorization = `"Bearer " + ${token}`;
   }
-console.log({authorization});
+  console.log({ authorization });
   const options = {
     url: url,
     method: method,
@@ -21,7 +21,7 @@ console.log({authorization});
       "Content-Type": "application/json;charset=UTF-8",
       Authorization: authorization,
     },
-   
+
     data: body,
   };
   try {
@@ -38,5 +38,6 @@ console.log({authorization});
     });
 
     arr?.length > 0 ? toast.error(arr[1]) : toast.error(e.request.responseText);
+    toast.error(e.message);
   }
 };

@@ -8,7 +8,7 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 
 export default function Table({data,columns,rowEvents}) {
 
-
+console.log({data});
   const pagination = paginationFactory({
     page: 1,
     sizePerPage: 5,

@@ -11,36 +11,26 @@ import { delHistory } from "../../store";
 import { getItem } from "../../sessionStorage";
 
 export default function HistoryTable() {
-  // const { state, dispatch } = useHistoryContext();
   const [modalShow, setModalShow] = useState(false);
   const [item, setItem] = useState();
-  const historyRecords=useSelector((state)=>{return state.history})
+  let history = useSelector((state) => {
+    return state.history;
+  });
 
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
   const handleDelete = async (id) => {
-    await api(`http://localhost:4000/history/${id}`, "delete", "","","",JSON.parse(getItem("userInfo")).token).then(
-      (data) => {
-        dispatch(delHistory(id));
-      }
-    );
+    await api(
+      `http://localhost:4000/history/${id}`,
+      "delete",
+      JSON.parse(getItem("userInfo")).token
+    ).then((data) => {
+      dispatch(delHistory(id));
+      console.log({ history });
+    });
   };
 
-  const editHistory = (row) => {
-    // navigate("/newaccount", { state: { user: row } });
-  };
-  const linkFollow = (cell, row, rowIndex, formatExtraData) => {
-    return (
-      <Button
-        className="general-btn"
-        onClick={() => {
-          editHistory(row);
-        }}
-      >
-        Edit
-      </Button>
-    );
-  };
+ 
   const deleteFormatter = (cell, row, rowIndex, formatExtraData) => {
     return (
       <Button className="general-btn" onClick={() => handleDelete(row.id)}>
@@ -62,7 +52,6 @@ export default function HistoryTable() {
       formatter: methodFormatter,
     },
     { dataField: "delete", text: "Delete", formatter: deleteFormatter },
-    { dataField: "edit", text: "Edit", formatter: linkFollow },
   ];
   const rowEvents = {
     onDoubleClick: (e, row, rowIndex) => {
@@ -72,16 +61,9 @@ export default function HistoryTable() {
     },
   };
 
-
- 
   return (
     <div className="table-horiz-scroll mt-3">
-      <Table
-        data={historyRecords}
-        columns={columns}
-
-        rowEvents={rowEvents}
-      />
+      <Table data={history} columns={columns} rowEvents={rowEvents} />
       {modalShow && (
         <ModalDialog
           show={modalShow}

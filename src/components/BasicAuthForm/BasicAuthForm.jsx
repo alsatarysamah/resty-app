@@ -29,7 +29,7 @@ function BasicAuthForm(props) {
               setPassword(e.target.value);
             }}
           />
-          <Button type="submit">Submit</Button>
+          <Button type="submit" className="general-btn mt-2">Submit</Button>
         </Form>
       </div>
     </Col>
