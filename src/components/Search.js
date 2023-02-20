@@ -33,7 +33,7 @@ function Search({ urlSetting, submitHandler,btnName }) {
               size="lg"
               type="submit"
             >
-              {btnName}
+            {btnName}
             </Button>
           </div>
         </Form>

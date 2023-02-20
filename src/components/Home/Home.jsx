@@ -62,7 +62,7 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       await api(
-        "http://localhost:4000/history",
+        `http://localhost:4000/history?userId=${JSON.parse(getItem("userInfo")).id}`,
         "get",
         JSON.parse(getItem("userInfo")).token
       ).then((data) => {
@@ -71,18 +71,19 @@ function Home() {
     };
     if (getItem("userInfo")) fetchData();
   }, [history]);
+  const urlSetting = (url) => {
+    setUrl(url);
+  };
   return (
     <div className="mt-5">
       <Helmet>
         <title>Resty</title>
       </Helmet>
       <Row className=" d-flex flex-column justify-content-center align-items-center">
-        <p>https://pokeapi.co/api/v2/pokemon</p>
-        <p>http://localhost:4000/history</p>
-        <p>https://api.covid19api.com/summary</p>
+       
         <ToastContainer />
         <Search
-          urlSetting={setUrl}
+          urlSetting={urlSetting}
           submitHandler={submitHandler}
           btnName="GO"
         />

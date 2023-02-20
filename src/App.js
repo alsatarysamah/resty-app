@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home/Home";
-import NavbarResty from "./components/Navbar/Navbar";
+import CollapsibleNavBar from "./components/Navbar/Navbar";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="d-flex flex-column site">
       <header>
-        <NavbarResty />
+        <CollapsibleNavBar />
       </header>
       <main>
        

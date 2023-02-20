@@ -2,12 +2,16 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
-import { getItem } from "../../sessionStorage";
+import { getItem, removeItem } from "../../sessionStorage";
 import "./navbar.css";
-function CollapsibleExample() {
+function CollapsibleNavBar() {
   const navigate = useNavigate();
   const handleSignout = () => {
-    sessionStorage.removeItem("userInfo");
+    removeItem("userInfo");
+    removeItem("app-token");
+    removeItem("username");
+    removeItem("password");
+
     navigate("/");
   };
   return (
@@ -45,4 +49,4 @@ function CollapsibleExample() {
   );
 }
 
-export default CollapsibleExample;
+export default CollapsibleNavBar;
