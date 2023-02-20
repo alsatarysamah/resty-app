@@ -13,7 +13,11 @@ const historySlice = createSlice({
     return state.filter((item) => item.id !== action.payload);
     
     },
+    filterHistory(state,action){
+      
+      return state.filter((record) => record.url === action.payload)
+    }
   },
 });
-export const { addHistory, delHistory } = historySlice.actions;
+export const { addHistory, delHistory,filterHistory } = historySlice.actions;
 export const historyReducer = historySlice.reducer;

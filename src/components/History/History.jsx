@@ -2,23 +2,28 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { api } from "../../api";
 import { getItem } from "../../sessionStorage";
+import { filterHistory } from "../../store";
 import HistoryTable from "../HistoryTable/HistoryTable";
 import Search from "../Search";
 import "./history.css";
 
 function History() {
-  const searchHandler = async (url) => {
-    console.log("search");
-  };
   const historyRecords = useSelector((state) => {
     return state.history;
   });
-  console.log("rendddder");
-  // let token = JSON.parse(getItem("userInfo")).token;
+const dispatch=useDispatch()
+  const searchHandler = async (url) => {
+    console.log({ url });
+    dispatch(filterHistory(url.trim()))
+  };
+
+
+
+
   return (
     <div className="d-flex flex-column site mt-5">
       <Helmet>

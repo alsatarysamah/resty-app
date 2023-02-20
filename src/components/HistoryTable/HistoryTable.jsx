@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { delHistory } from "../../store";
 import { getItem } from "../../sessionStorage";
 
-export default function HistoryTable() {
+export default function HistoryTable({data}) {
   const [modalShow, setModalShow] = useState(false);
   const [item, setItem] = useState();
   let history = useSelector((state) => {

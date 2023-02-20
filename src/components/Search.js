@@ -3,13 +3,16 @@ import React, { useState } from "react";
 import { Button, Col, Form } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
 
-function Search({ urlSetting, submitHandler,btnName }) {
+function Search({ urlSetting, submitHandler, btnName }) {
   const [item, setItem] = useState();
   const goHandler = (e) => {
     e.preventDefault();
-    // urlSetting(item)
-    submitHandler();
-  
+    
+    submitHandler(item.trim());
+  };
+  const handleChange = (e) => {
+    setItem(e.target.value);
+    if (urlSetting) urlSetting(e.target.value);
   };
   return (
     <Col md={12} lg={7} xs={18}>
@@ -21,9 +24,7 @@ function Search({ urlSetting, submitHandler,btnName }) {
             xs={12}
             type="url"
             placeholder="Enter a URL"
-            onChange={(e) => {
-              urlSetting(e.target.value);
-            }}
+            onChange={handleChange}
             required
           />
           <div lg={6}>
@@ -33,7 +34,7 @@ function Search({ urlSetting, submitHandler,btnName }) {
               size="lg"
               type="submit"
             >
-            {btnName}
+              {btnName}
             </Button>
           </div>
         </Form>
