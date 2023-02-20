@@ -29,7 +29,8 @@ export default function Signup() {
         navigate("/signin");
       })
       .catch((e) => {
-        toast.error("username already exist");
+        console.log(e);
+        toast.error("Invalid sign up ");
       });
   };
   return (

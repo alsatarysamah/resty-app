@@ -1,30 +1,32 @@
-// import { render, fireEvent } from '@testing-library/react';
-// import Search from './Search';
+import '@testing-library/jest-dom';
+import React from "react";
+import { render, fireEvent, screen } from "@testing-library/react";
+import Search from "../src/components/Search";
 
-// describe('Search', () => {
-//   test('submitHandler should be called when the form is submitted', () => {
-//     const mockSubmitHandler = jest.fn();
-//     const { getByPlaceholderText, getByText } = render(
-//       <Search submitHandler={mockSubmitHandler} btnName="Search" />
-//     );
-//     const input = getByPlaceholderText('Enter a URL');
-//     const submitButton = getByText('Search');
 
+describe('Search component', () => {
+  it('renders search input and button', () => {
+    render(<Search />);
+    const input = screen.queryByPlaceholderText('Enter a URL');
+    expect(input).toBeTruthy();
+
+    const button = screen.getByText('GO');
+    expect(button).toBeTruthy();
+  });
+
+ 
+//   it('calls the submitHandler function when the "GO" button is clicked', () => {
+//     const handleSubmit = jest.fn();
+//     const handleUrlChange = jest.fn();
+//     render(<Search onSubmit={handleSubmit} onUrlChange={handleUrlChange} />);
+    
+//     const input = screen.getByPlaceholderText('Enter a URL');
+//     const button = screen.getByText('GO');
+    
 //     fireEvent.change(input, { target: { value: 'https://example.com' } });
-//     fireEvent.click(submitButton);
-
-//     expect(mockSubmitHandler).toHaveBeenCalled();
+//     fireEvent.click(button);
+    
+//     expect(handleUrlChange).toHaveBeenCalledWith('https://example.com');
+//     expect(handleSubmit).toHaveBeenCalledWith('https://example.com');
 //   });
-
-//   test('urlSetting should be called when input is changed', () => {
-//     const mockUrlSetting = jest.fn();
-//     const { getByPlaceholderText } = render(
-//       <Search urlSetting={mockUrlSetting} btnName="Go" />
-//     );
-//     const input = getByPlaceholderText('Enter a URL');
-
-//     fireEvent.change(input, { target: { value: 'https://example.com' } });
-
-//     expect(mockUrlSetting).toHaveBeenCalledWith('https://example.com');
-//   });
-// });
+});

@@ -3,12 +3,13 @@ import { toast } from "react-toastify";
 import base64 from "base-64";
 
 export const api = async (url, method,token, body, username, password) => {
-  console.log({ username });
-  console.log({ password });
-  console.log({ url });
+  try {
   let authorization = "";
   if (url.includes("signin")) {
+    if(username && password)
     authorization = ` Basic ${base64.encode(`${username}:${password}`)}`;
+    else
+    throw new Error("You should enter basic auth")
   } else {
     authorization = `"Bearer " + ${token}`;
   }
@@ -24,12 +25,13 @@ export const api = async (url, method,token, body, username, password) => {
 
     data: body,
   };
-  try {
+
     const response = await axios(options);
     console.log(response.data);
     return response.data;
   } catch (e) {
     console.log(e);
+    toast.error(e.message);
 
     let arr = JSON.parse(e.request?.responseText).errors;
 
@@ -38,6 +40,5 @@ export const api = async (url, method,token, body, username, password) => {
     });
 
     arr?.length > 0 ? toast.error(arr[1]) : toast.error(e.request.responseText);
-    toast.error(e.message);
   }
 };

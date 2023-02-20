@@ -1,74 +1,52 @@
-# Getting Started with Create React App
-//carousel
+# RESTy
 
- //'http://localhost:3000/analyze?imageurl=https://google.com'
-  //'http://localhost:4000/history?url=https://api.samah.com/' 
-  //https://pokeapi.co/api/v2/pokemon
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A browser based API testing tool
 
-## Available Scripts
 
-In the project directory, you can run:
+# Demo
 
-### `npm start`
+<video width="320" height="240" controls>
+  <source src="./www_screencapture_com_2023-2-20_21_24.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Business Requirements
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Our application will be an API testing tool that can be run in any browser, allowing a user to easily interact with APIs in a familiar interface.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+The core requirements and functionality are as follows:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Simple, intuitive user interface
+  - A form where a user:
+    - Enters a REST API Endpoint (URI)
+    - Selects the REST Method to use (`get`, `post`, `put`, `delete`)
+    - For `put` and `post`, allow the user to enter JSON to be used as the body for the request
+    - A button to initiate the request
+    - Basic Auth (to send `username` and `password`) with the request header
+    - Bearer to send `token` with the request.
+  - An output section which:
+    - Displays a spinner to indicate a request is in process
+    - Once a request is complete:
+      - Hide the spinner
+      - Display a well formatted view of the API response in 2 sections
+        - Headers
+        - Body
+  - A history screen which:
+    - Shows a list of all unique, successful requests
+    - Allows a user to douole click to select one to re-populate the form so they can show the result in that time
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Technical Requirements
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The application will be created with the following overall architecture and methodologies
 
-### `npm run eject`
+1. React
+1. ES6 Classes
+1. Shared Component State
+1. session Storage for storing request history
+1. Axios for performing API Requests
+1. Bootstrap for styling
+   - Global Theme
+   - Component specific CSS where possible
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
