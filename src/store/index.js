@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { historyReducer } from "./Slices/historySlice";
-import {addHistory, delHistory,filterHistory } from "./Slices/historySlice"
+import {addHistory, delHistory,filterHistory,resetState } from "./Slices/historySlice"
 
 
 
@@ -12,4 +12,4 @@ export const store = configureStore({
 
 console.log(store.getState());
 
-export {addHistory, delHistory,filterHistory}
+export {addHistory, delHistory,filterHistory,resetState}

@@ -59,28 +59,31 @@ function Home() {
       navigate("/signin");
     }
   };
-  useEffect(() => {
-    const fetchData = async () => {
-      await api(
-        `http://localhost:4000/history?userId=${JSON.parse(getItem("userInfo")).id}`,
-        "get",
-        JSON.parse(getItem("userInfo")).token
-      ).then((data) => {
-        sessionStorage.setItem("history", JSON.stringify(data));
-      });
-    };
-    if (getItem("userInfo")) fetchData();
-  }, [history]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await api(
+  //       `http://localhost:4000/history?userId=${JSON.parse(getItem("userInfo")).id}`,
+  //       "get",
+  //       JSON.parse(getItem("userInfo")).token
+  //     ).then((data) => {
+  //       sessionStorage.setItem("history", JSON.stringify(data));
+  //     });
+  //   };
+  //   if (getItem("userInfo")) fetchData();
+  // }, []);
   const urlSetting = (url) => {
     setUrl(url);
   };
+  console.log({history});
   return (
     <div className="mt-5">
       <Helmet>
         <title>Resty</title>
       </Helmet>
       <Row className=" d-flex flex-column justify-content-center align-items-center">
-       
+      <p>https://pokeapi.co/api/v2/pokemon</p>
+        <p>http://localhost:4000/history</p>
+        <p>https://api.covid19api.com/summary</p>
         <ToastContainer />
         <Search
           urlSetting={urlSetting}

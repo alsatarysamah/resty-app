@@ -1,19 +1,16 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { useNavigate } from "react-router-dom";
-import { getItem, removeItem } from "../../sessionStorage";
+import { Link, useNavigate } from "react-router-dom";
+import { getItem } from "../../sessionStorage";
 import "./navbar.css";
 function CollapsibleNavBar() {
   const navigate = useNavigate();
   const handleSignout = () => {
-    removeItem("userInfo");
-    removeItem("app-token");
-    removeItem("username");
-    removeItem("password");
-
+    sessionStorage.clear();
     navigate("/");
   };
+
   return (
     <Navbar
       className="nav"
@@ -23,17 +20,18 @@ function CollapsibleNavBar() {
       variant="white"
     >
       <Container>
-        <Navbar.Brand className="nav" href="/">
+        <Navbar.Brand className="nav" as={Link} to="/">
           Resty
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto ">
-            {/* <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link> */}
+            
           </Nav>
           <Nav className="d-flex align-items-center">
-            <Nav.Link href="/history">History</Nav.Link>
+            <Nav.Link as={Link} to="/history">
+              History
+            </Nav.Link>
             <Nav.Link eventKey={2} href="/signin">
               Signin
             </Nav.Link>

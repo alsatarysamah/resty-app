@@ -28,7 +28,7 @@ function MethodTab({methodSetting,setBody}) {
             <Body title="Body --JSON content" setBody={setBody}/>
           </Tab>
           <Tab tabClassName="method-tab" eventKey="put" title="PUT">
-            <Body />
+            <Body title="Body --JSON content" setBody={setBody}/>
           </Tab>
           <Tab tabClassName="method-tab" eventKey="delete" title="DELETE"></Tab>
           <Tab

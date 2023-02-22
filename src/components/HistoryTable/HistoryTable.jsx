@@ -43,15 +43,15 @@ export default function HistoryTable({data}) {
   };
 
   const columns = [
-    { dataField: "id", text: "Id", sort: true, width: 100 },
-    { dataField: "url", text: "URL" },
+    { dataField: "id", text: "Id", sort: true, headerStyle: { width: '8%' }, style: { width: '8%' } },
+    { dataField: "url", text: "URL",headerStyle: { width: '20%' }, style: { width: '20%' }  },
     {
       dataField: "method",
       text: "Method",
 
-      formatter: methodFormatter,
+      formatter: methodFormatter,headerStyle: { width: '10%' }, style: { width: '10%' } 
     },
-    { dataField: "delete", text: "Delete", formatter: deleteFormatter },
+    { dataField: "delete", text: "Delete", formatter: deleteFormatter ,headerStyle: { width: '10%' }, style: { width: '10%' }  },
   ];
   const rowEvents = {
     onDoubleClick: (e, row, rowIndex) => {

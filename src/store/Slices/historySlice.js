@@ -16,8 +16,11 @@ const historySlice = createSlice({
     filterHistory(state,action){
       
       return state.filter((record) => record.url === action.payload)
-    }
+    },
+    resetState: (state, action) => {
+      return JSON.parse(getItem("history")) || [];
+    },
   },
 });
-export const { addHistory, delHistory,filterHistory } = historySlice.actions;
+export const { addHistory, delHistory,filterHistory,resetState } = historySlice.actions;
 export const historyReducer = historySlice.reducer;
