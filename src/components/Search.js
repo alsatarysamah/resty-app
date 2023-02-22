@@ -15,16 +15,17 @@ function Search({ urlSetting, submitHandler, btnName }) {
     if (urlSetting) urlSetting(e.target.value);
   };
   return (
-    <Col md={12} lg={7} xs={18}>
+    <Col md={7} lg={7} xs={15}>
       <div>
         <ToastContainer />
-        <Form onSubmit={goHandler} className="d-flex  mt-1 mx-5" xs={10}>
+        <Form onSubmit={goHandler} className="d-flex  m-2 mx-5" xs={10}>
           <Form.Control
             className="mx-3"
             xs={12}
             type="url"
             placeholder="Enter a URL"
             onChange={handleChange}
+            // style={{ width: "100%" }}
             required
           />
           <div lg={6}>
