@@ -20,7 +20,7 @@ function ModalDialog(props) {
       </Modal.Header>
       <Modal.Body>
         <h4>{props.item.method}</h4>
-       <Result result={props.item.response}/>
+       <Result result={props.item.response} size={12} spinnerShow={false}/>
       </Modal.Body>
     </Modal>
   );

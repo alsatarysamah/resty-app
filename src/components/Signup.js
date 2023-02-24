@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 // import { Store } from "../store";
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
 export default function Signup() {
@@ -11,10 +11,10 @@ export default function Signup() {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  const role = "user";
   const signupHandler = (e) => {
     e.preventDefault();
-    if (password != confirmPassword) {
+    if (password !== confirmPassword) {
       toast.error("password do not match ");
       return;
     }
@@ -23,6 +23,7 @@ export default function Signup() {
       .post("http://localhost:4000/signup", {
         username,
         password,
+        role,
       })
       .then((data) => {
         sessionStorage.setItem("userInfo", JSON.stringify(data));
@@ -43,7 +44,7 @@ export default function Signup() {
         <Row className=" d-flex justify-content-center align-items-center mt-5">
           <Col md={8} lg={10} xs={12}>
             <div className=""></div>
-            <ToastContainer />
+         
             <Card className="shadow px-4">
               <Card.Body>
                 <div className="mb-3 mt-md-4">

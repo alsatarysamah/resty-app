@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import base64 from "base-64";
 import * as axios from "axios";
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
@@ -45,7 +45,6 @@ export default function Signin() {
       <Row className=" d-flex justify-content-center align-items-center mt-5">
         <Col md={8} lg={5} xs={12}>
           <div className=""></div>
-          <ToastContainer />
 
           <Card className="shadow px-4">
             <Card.Body>

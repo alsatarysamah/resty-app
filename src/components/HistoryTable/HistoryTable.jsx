@@ -9,8 +9,9 @@ import ModalDialog from "../Modal/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { delHistory } from "../../store";
 import { getItem } from "../../sessionStorage";
+import { toast } from "react-toastify";
 
-export default function HistoryTable({data}) {
+export default function HistoryTable({ data }) {
   const [modalShow, setModalShow] = useState(false);
   const [item, setItem] = useState();
   let history = useSelector((state) => {
@@ -26,14 +27,18 @@ export default function HistoryTable({data}) {
       JSON.parse(getItem("userInfo")).token
     ).then((data) => {
       dispatch(delHistory(id));
+      toast.success("Deleted");
       console.log({ history });
     });
   };
 
- 
   const deleteFormatter = (cell, row, rowIndex, formatExtraData) => {
     return (
-      <Button className="general-btn" onClick={() => handleDelete(row.id)}>
+      <Button
+        className="general-btn"
+        title="Delete this record"
+        onClick={() => handleDelete(row.id)}
+      >
         <i className="fa fa-trash "></i>
       </Button>
     );
@@ -43,21 +48,51 @@ export default function HistoryTable({data}) {
   };
 
   const columns = [
-    { dataField: "id", text: "Id", sort: true, headerStyle: { width: '8%' }, style: { width: '8%' } },
-    { dataField: "url", text: "URL",headerStyle: { width: '20%' }, style: { width: '20%' }  },
+    {
+      dataField: "id",
+      text: "Id",
+      sort: true,
+      headerStyle: { width: "8%" },
+      style: { width: "8%" },
+    },
+    {
+      dataField: "url",
+      text: "URL",
+      headerStyle: { width: "20%" },
+      style: { width: "20%" },
+    },
     {
       dataField: "method",
       text: "Method",
 
-      formatter: methodFormatter,headerStyle: { width: '10%' }, style: { width: '10%' } 
+      formatter: methodFormatter,
+      headerStyle: { width: "10%" },
+      style: { width: "10%" },
     },
-    { dataField: "delete", text: "Delete", formatter: deleteFormatter ,headerStyle: { width: '10%' }, style: { width: '10%' }  },
+    {
+      dataField: "delete",
+      text: "Delete",
+      formatter: deleteFormatter,
+      headerStyle: { width: "10%" },
+      style: { width: "10%" },
+    },
   ];
-  const rowEvents = {
-    onDoubleClick: (e, row, rowIndex) => {
-      setItem(row);
 
-      setModalShow(true);
+  const rowEvents = {
+    onClick: (e, row, rowIndex) => {
+      if (item && item.id === row.id) {
+        setModalShow(true);
+      } else {
+        setItem(row);
+      }
+    },
+    onTouchStart: (e, row, rowIndex) => {
+      e.preventDefault();
+      if (item && item.id === row.id) {
+        setModalShow(true);
+      } else {
+        setItem(row);
+      }
     },
   };
 
