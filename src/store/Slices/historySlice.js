@@ -6,7 +6,6 @@ const historySlice = createSlice({
   initialState:JSON.parse(getItem("history")) || [],
   reducers: {
     addHistory(state, action) {
-      console.log(action.payload);
       state.push(action.payload);
     },
     delHistory(state, action) {

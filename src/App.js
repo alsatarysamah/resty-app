@@ -5,8 +5,9 @@ import CollapsibleNavBar from "./components/Navbar/Navbar";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import "react-toastify/dist/ReactToastify.css";
-import History from "./components/History/History";
+import HistoryScreen from "./components/HistoryScreen/HistoryScreen";
 import { ToastContainer } from "react-bootstrap";
+import UserTable from "./components/UserTable/UserTable";
 
 function App() {
   return (
@@ -24,7 +25,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/history" element={<History />} />
+          <Route path="/history" element={<HistoryScreen />} />
+          <Route path="/users" element={<UserTable />} />
+
         </Routes>
       </main>
       <footer bg="dark" variant="dark">

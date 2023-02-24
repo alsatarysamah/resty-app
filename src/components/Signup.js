@@ -20,7 +20,7 @@ export default function Signup() {
     }
 
     axios
-      .post("http://localhost:4000/signup", {
+      .post("http://localhost:5000/signup", {
         username,
         password,
         role,
