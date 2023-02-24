@@ -22,7 +22,7 @@ export default function HistoryTable({ data }) {
 
   const handleDelete = async (id) => {
     await api(
-      `http://localhost:4000/history/${id}`,
+      `http://localhost:5000/history/${id}`,
       "delete",
       JSON.parse(getItem("userInfo")).token
     ).then((data) => {

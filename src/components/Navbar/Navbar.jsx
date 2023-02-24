@@ -3,6 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { getItem } from "../../sessionStorage";
+import Auth from "../Auth";
 import "./navbar.css";
 function CollapsibleNavBar() {
   const navigate = useNavigate();
@@ -29,6 +30,11 @@ function CollapsibleNavBar() {
             
           </Nav>
           <Nav className="d-flex align-items-center">
+            <Auth role="admin" >
+          <Nav.Link as={Link} to="/users">
+              Users
+            </Nav.Link>
+            </Auth>
             <Nav.Link as={Link} to="/history">
               History
             </Nav.Link>

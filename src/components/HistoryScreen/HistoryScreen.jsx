@@ -28,7 +28,7 @@ function History() {
   console.log({ history });
   const fetchData = async () => {
     await api(
-      `http://localhost:4000/history`,
+      `http://localhost:5000/history`,
       "get",
       JSON.parse(getItem("userInfo")).token
     ).then((data) => {
@@ -45,7 +45,7 @@ function History() {
   };
   const deleteAllCLick = async (id) => {
     await api(
-      `http://localhost:4000/history/1?all=1`,
+      `http://localhost:5000/history/1?all=1`,
       "delete",
       JSON.parse(getItem("userInfo")).token
     ).then((data) => {
