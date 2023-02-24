@@ -20,7 +20,11 @@ const historySlice = createSlice({
     resetState: (state, action) => {
       return JSON.parse(getItem("history")) || [];
     },
+    deletAll:(state,action)=>{
+      return [];
+    }
   },
 });
-export const { addHistory, delHistory,filterHistory,resetState } = historySlice.actions;
+    
+      export const { addHistory, delHistory,filterHistory,resetState, deletAll} = historySlice.actions;
 export const historyReducer = historySlice.reducer;

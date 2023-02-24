@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Button, Col, Form } from "react-bootstrap";
-import { toast, ToastContainer } from "react-toastify";
+
 
 function Search({ urlSetting, submitHandler, btnName }) {
   const [item, setItem] = useState();
@@ -17,7 +17,6 @@ function Search({ urlSetting, submitHandler, btnName }) {
   return (
     <Col md={7} lg={7} xs={15}>
       <div>
-        <ToastContainer />
         <Form onSubmit={goHandler} className="d-flex  m-2 mx-5" xs={10}>
           <Form.Control
             className="mx-3"

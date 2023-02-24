@@ -6,22 +6,25 @@ import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import "react-toastify/dist/ReactToastify.css";
 import History from "./components/History/History";
+import { ToastContainer } from "react-bootstrap";
 
 function App() {
   return (
     <div className="d-flex flex-column site">
+      <ToastContainer
+        position="top-center"
+        style={{ width: "200px", height: "100px" }}
+      />
+
       <header>
         <CollapsibleNavBar />
       </header>
       <main>
-       
-       
         <Routes>
-          <Route  path="/" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/history" element={<History />} />
-
         </Routes>
       </main>
       <footer bg="dark" variant="dark">
