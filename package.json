@@ -2,12 +2,14 @@
   "name": "resty-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://alsatarysamah.github.io/resty-app/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.2",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "base-64": "^1.0.0",
     "bootstrap": "^5.2.1",
+    "gh-pages": "^5.0.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
     "react-bootstrap-table-next": "^4.0.3",
@@ -26,6 +28,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+   "predeploy": "npm run build",
+ "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "NODE_ENV=test jest --coverage ",
