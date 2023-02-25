@@ -9,11 +9,12 @@ import ModalDialog from "../Modal/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { delHistory } from "../../store";
 import { getItem } from "../../sessionStorage";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function HistoryTable({ data }) {
   const [modalShow, setModalShow] = useState(false);
   const [item, setItem] = useState();
+  const isAdmin = JSON.parse(getItem("userInfo")).role === "admin";
   let history = useSelector((state) => {
     return state.history;
   });
@@ -28,7 +29,7 @@ export default function HistoryTable({ data }) {
     ).then((data) => {
       dispatch(delHistory(id));
       toast.success("Deleted");
-      console.log({ history });
+    
     });
   };
 
@@ -77,7 +78,14 @@ export default function HistoryTable({ data }) {
       style: { width: "10%" },
     },
   ];
-
+  if (isAdmin) {
+    columns.splice(3, 0, {
+      dataField: "userId",
+      text: "User ID",
+      headerStyle: { width: "10%" },
+      style: { width: "10%" },
+    });
+  }
   const rowEvents = {
     onClick: (e, row, rowIndex) => {
       if (item && item.id === row.id) {
@@ -98,6 +106,10 @@ export default function HistoryTable({ data }) {
 
   return (
     <div className="table-horiz-scroll mt-3">
+        <ToastContainer
+        position="top-center"
+        style={{ width: "200px", height: "100px" }}
+      />
       <Table data={history} columns={columns} rowEvents={rowEvents} />
       {modalShow && (
         <ModalDialog

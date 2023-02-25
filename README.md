@@ -30,12 +30,11 @@ The core requirements and functionality are as follows:
     - Displays a spinner to indicate a request is in process
     - Once a request is complete:
       - Hide the spinner
-      - Display a well formatted view of the API response in 2 sections
-        - Headers
-        - Body
+      - Display a well formatted view of the API response .
   - A history screen which:
     - Shows a list of all unique, successful requests
     - Allows a user to douole click to select one to re-populate the form so they can show the result in that time
+  - An all user screen to show all users of the App for admin only .
 
 ## Technical Requirements
 

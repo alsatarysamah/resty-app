@@ -6,7 +6,7 @@ import Search from "../Search";
 import Body from "../Body";
 import Result from "../Result/Result";
 import { api } from "../../api";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { Helmet } from "react-helmet-async";
 import { getItem, setItem } from "../../sessionStorage";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,11 +22,11 @@ function Home() {
   const [spinnerShow, setSpinnerShow] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const history = useSelector((state) => {
-    return state.history;
-  });
+
+  const allowedMethods = ["get", "post", "put", "delete"]; 
 
   const submitHandler = async (e) => {
+    if(allowedMethods.includes(method)){
     setSpinnerShow(true);
     let res;
     if (getItem("userInfo")) {
@@ -49,7 +49,7 @@ function Home() {
         response: res,
         userId: JSON.parse(getItem("userInfo")).id,
       };
-      // if (res!=null)
+      if (res!=null)
       api(
         "http://localhost:5000/history",
         "post",
@@ -62,36 +62,27 @@ function Home() {
     } else {
       // toast.error("You should signin")
       navigate("/signin");
+    }}
+    else{
+      toast.error("Choose HTTP method")
     }
   };
 
   const urlSetting = (url) => {
     setUrl(url);
   };
-  const fetchData = async () => {
-    await api(
-      `http://localhost:5000/user`,
-      "get",
-      JSON.parse(getItem("userInfo")).token
-    ).then((data) => {
-      console.log({data});
-      setItem("app-users", JSON.stringify(data));
-    });
-  };
-
-  useEffect(() => {
-    if (getItem("userInfo") && JSON.parse(getItem("userInfo")).role == "admin")
-      fetchData();
-  }, []);
+ 
   return (
     <div className="mt-5">
       <Helmet>
         <title>Resty</title>
       </Helmet>
+      <ToastContainer
+        position="top-center"
+        style={{ width: "200px", height: "100px" }}
+      />
       <Row className=" d-flex flex-column justify-content-center align-items-center">
-        <p>https://pokeapi.co/api/v2/pokemon</p>
-        <p>http://localhost:5000/history</p>
-        <p>https://api.covid19api.com/summary</p>
+      
 
         <Search
           urlSetting={urlSetting}
