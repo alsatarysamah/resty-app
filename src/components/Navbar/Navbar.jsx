@@ -21,7 +21,7 @@ function CollapsibleNavBar() {
       variant="white"
     >
       <Container>
-        <Navbar.Brand className="nav" as={Link} to="/">
+        <Navbar.Brand className="nav" as={Link} to="/resty-app#/">
           Resty
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -29,11 +29,11 @@ function CollapsibleNavBar() {
           <Nav className="me-auto "></Nav>
           <Nav className="d-flex align-items-center">
             <Auth role="admin">
-              <Nav.Link as={Link} to="/users">
+              <Nav.Link as={Link} to="/resty-app#/users">
                 Users
               </Nav.Link>
             </Auth>
-            <Nav.Link as={Link} to="/history">
+            <Nav.Link as={Link} to="/resty-app#/history">
               History
             </Nav.Link>
 
@@ -42,7 +42,7 @@ function CollapsibleNavBar() {
                 Signout
               </Nav.Link>
             ) : (
-              <Nav.Link eventKey={2} href="/signin">
+              <Nav.Link eventKey={2} href="/resty-app#/signin">
                 Signin
               </Nav.Link>
             )}
