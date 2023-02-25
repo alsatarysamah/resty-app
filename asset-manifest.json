@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/resty-app/static/css/main.37d0b24b.css",
+    "main.js": "/resty-app/static/js/main.eee68b2c.js",
+    "static/js/787.40542801.chunk.js": "/resty-app/static/js/787.40542801.chunk.js",
+    "index.html": "/resty-app/index.html",
+    "main.37d0b24b.css.map": "/resty-app/static/css/main.37d0b24b.css.map",
+    "main.eee68b2c.js.map": "/resty-app/static/js/main.eee68b2c.js.map",
+    "787.40542801.chunk.js.map": "/resty-app/static/js/787.40542801.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.37d0b24b.css",
+    "static/js/main.eee68b2c.js"
+  ]
+}
