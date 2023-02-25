@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Row } from "react-bootstrap";
-import { toast } from "react-toastify";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import { api } from "../../api";
 import { getItem, setItem } from "../../sessionStorage";
+import { delUser, resetUser } from "../../store";
 import Table from "../Table";
 
 function UserTable(props) {
-  const [user, setuser] = useState(JSON.parse(getItem("app-users")) || []);
+  const dispatch = useDispatch();
+  const navigate=useNavigate();
+  const users = useSelector((state) => {
+    return state.users;
+  });
+  
   const handleDelete = async (id) => {
     await api(
       `http://localhost:5000/user/${id}`,
       "delete",
       JSON.parse(getItem("userInfo")).token
     ).then((data) => {
-      fetchData();
-      setuser(JSON.parse(getItem("app-users")));
-      //   dispatch(delHistory(id));
-        toast.success("Deleted");
-      //   console.log({ history });
+      dispatch(delUser(id));
+      toast.success("Deleted");
     });
   };
   const deleteFormatter = (cell, row, rowIndex, formatExtraData) => {
@@ -36,8 +41,8 @@ function UserTable(props) {
       dataField: "id",
       text: "Id",
       sort: true,
-      headerStyle: { width: "4%" },
-      style: { width: "4%" },
+      headerStyle: { width: "7%" },
+      style: { width: "7%" },
     },
     {
       dataField: "username",
@@ -46,8 +51,20 @@ function UserTable(props) {
       style: { width: "15%" },
     },
     {
-      dataField: "password",
-      text: "Password",
+      dataField: "firstName",
+      text: "First Name",
+      headerStyle: { width: "20%" },
+      style: { width: "20%" },
+    },
+    {
+      dataField: "lastName",
+      text: "Last Name",
+      headerStyle: { width: "20%" },
+      style: { width: "20%" },
+    },
+    {
+      dataField: "role",
+      text: "Role",
       headerStyle: { width: "20%" },
       style: { width: "20%" },
     },
@@ -66,26 +83,37 @@ function UserTable(props) {
       JSON.parse(getItem("userInfo")).token
     ).then((data) => {
       setItem("app-users", JSON.stringify(data));
-      //   dispatch(resetState());
-      console.log({ data });
-      setuser(data);
+      dispatch(resetUser());
     });
   };
 
   useEffect(() => {
-    console.log("eeeeeeeeeeeeeeeeeee");
     fetchData();
   }, []);
   //   fetchData()
   return (
     <div className="d-flex flex-column site mt-5">
-      <Row className="justify-content-around  mb-3">
+       <ToastContainer
+        position="top-center"
+        style={{ width: "200px", height: "100px" }}
+      />
+      <Container className="d-flex justify-content-center ">
+        <h2>Users Table</h2>
+      </Container>
+      <Container className="d-flex justify-content-end fluid">
+  <Col xs={3}>
+    <Button className="general-btn" onClick={()=>{navigate("/newuser")}}>New User</Button>
+  </Col>
+</Container>
+     
+      <Row className="justify-content-center  mb-3">
         <Col md={8} lg={8} xs={8}>
           <div className="table-horiz-scroll mt-5 mx-3">
-            {user && <Table data={user} columns={columns} />}
+            {users && <Table data={users} columns={columns} />}
           </div>
         </Col>
       </Row>
+      
     </div>
   );
 }

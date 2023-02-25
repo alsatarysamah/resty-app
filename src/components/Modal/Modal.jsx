@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Result from "../Result/Result";
 import "./modal.css"
 function ModalDialog(props) {
-  console.log(props.item);
+
 
   return (
     <Modal

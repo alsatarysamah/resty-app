@@ -4,7 +4,7 @@ import { Button, Col, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { toast,  } from "react-toastify";
+import { toast } from "react-toastify";
 import { api } from "../../api";
 import { getItem } from "../../sessionStorage";
 import { deletAll, filterHistory, resetState } from "../../store";
@@ -19,13 +19,13 @@ function History() {
   });
   const dispatch = useDispatch();
   const searchHandler = async (url) => {
-    console.log({ url });
+  
     dispatch(filterHistory(url.trim()));
   };
   const history = useSelector((state) => {
     return state.history;
   });
-  console.log({ history });
+
   const fetchData = async () => {
     await api(
       `http://localhost:5000/history`,
@@ -33,7 +33,7 @@ function History() {
       JSON.parse(getItem("userInfo")).token
     ).then((data) => {
       sessionStorage.setItem("history", JSON.stringify(data));
-      dispatch(resetState());
+      dispatch(resetState(data));
     });
   };
   useEffect(() => {
@@ -51,7 +51,7 @@ function History() {
     ).then((data) => {
       dispatch(deletAll());
       toast.success("Delete All Records");
-      console.log({ history });
+   
     });
   };
   return (
@@ -76,18 +76,16 @@ function History() {
               </Button>
             </Col>
             <Auth role="admin">
-            <Col xs={3} md={3} lg={1}>
-              <Button
-                className="general-btn mt-2 "
-                size="lg"
-                onClick={deleteAllCLick}
-                title="Delete all records" 
-                
-              >
-                <i className="fa fa-trash "></i> 
-               
-              </Button>
-            </Col>
+              <Col xs={3} md={3} lg={1}>
+                <Button
+                  className="general-btn mt-2 "
+                  size="lg"
+                  onClick={deleteAllCLick}
+                  title="Delete all records"
+                >
+                  <i className="fa fa-trash "></i>
+                </Button>
+              </Col>
             </Auth>
           </Row>
 

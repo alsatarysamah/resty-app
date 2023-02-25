@@ -26,26 +26,26 @@ function CollapsibleNavBar() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto ">
-            
-          </Nav>
+          <Nav className="me-auto "></Nav>
           <Nav className="d-flex align-items-center">
-            <Auth role="admin" >
-          <Nav.Link as={Link} to="/users">
-              Users
-            </Nav.Link>
+            <Auth role="admin">
+              <Nav.Link as={Link} to="/users">
+                Users
+              </Nav.Link>
             </Auth>
             <Nav.Link as={Link} to="/history">
               History
             </Nav.Link>
-            <Nav.Link eventKey={2} href="/signin">
-              Signin
-            </Nav.Link>
+
             {getItem("userInfo") ? (
               <Nav.Link eventKey={2} onClick={handleSignout}>
                 Signout
               </Nav.Link>
-            ) : null}
+            ) : (
+              <Nav.Link eventKey={2} href="/signin">
+                Signin
+              </Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

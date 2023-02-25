@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './spinner.css';
 
 function SpinnerRect(props) {
-  return (
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setVisible(false);
+    }, 6000); // 1 minute
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
+  return visible ? (
     <div className={`spinner ${props.className}`}>
       <div className="bar bar11"></div>
-
       <div className="bar bar10"></div>
-
       <div className="bar bar1"></div>
       <div className="bar bar2"></div>
       <div className="bar bar3"></div>
@@ -18,6 +28,7 @@ function SpinnerRect(props) {
       <div className="bar bar8"></div>
       <div className="bar bar9"></div>
     </div>
-  );
+  ) : null;
 }
+
 export default SpinnerRect;

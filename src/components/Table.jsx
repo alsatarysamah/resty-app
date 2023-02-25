@@ -8,7 +8,7 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 
 export default function Table({data,columns,rowEvents}) {
 
-console.log({data});
+
   const pagination = paginationFactory({
     page: 1,
     sizePerPage: 5,
@@ -18,14 +18,7 @@ console.log({data});
     selected:true,
     hideSizePerPage:true,//select from the  UI how many items per page
     alwaysShowAllBtns: true,
-    onPageChange: function (page, sizePerPage) {
-      console.log('page', page);
-      console.log('sizePerPage', sizePerPage);
-    },
-    onSizePerPageChange: function (page, sizePerPage) {
-      console.log('page', page);
-      console.log('sizePerPage', sizePerPage);
-    },
+    
    
   });
   
